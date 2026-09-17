@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="light" name="color-scheme"/>
+<title>Room to Regulate — A Home for Neurodivergent Moms</title>
+<meta content="A mental health content platform and community for neurodivergent moms and moms raising neurodivergent kids — real essays, real templates, real policy tracking." name="description"/>
+<meta content="neurodivergent moms, ADHD mom support, autism parent community, mental load, mom burnout resources" name="keywords"/>
+<link href="https://roomtoregulate.com/home.html" rel="canonical"/>
+<meta content="Room to Regulate — Brand Comp" property="og:title"/>
+<meta content="A mental health content platform and community for neurodivergent moms and moms raising neurodivergent kids — real essays, real templates, real policy tracking." property="og:description"/>
+<meta content="website" property="og:type"/>
+<meta content="https://roomtoregulate.com/home.html" property="og:url"/>
+<meta content="Room to Regulate" property="og:site_name"/>
+<meta content="summary" name="twitter:card"/>
+<meta content="Room to Regulate — Brand Comp" name="twitter:title"/>
+<meta content="A mental health content platform and community for neurodivergent moms and moms raising neurodivergent kids — real essays, real templates, real policy tracking." name="twitter:description"/>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Room to Regulate",
+  "url": "https://roomtoregulate.com",
+  "description": "A mental health content platform and community for neurodivergent moms and moms raising neurodivergent kids.",
+  "sameAs": []
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Room to Regulate",
+  "url": "https://roomtoregulate.com",
+  "description": "A mental health content platform and community for neurodivergent moms and moms raising neurodivergent kids \u2014 real essays, real templates, real policy tracking.",
+  "publisher": {
+    "@type": "Organization",
+    "name": "Room to Regulate",
+    "url": "https://roomtoregulate.com"
+  }
+}
+</script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&amp;family=Inter:wght@400;450;500;600;700&amp;family=Caveat:wght@500;700&amp;display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --ink: #423E45;
+    --teal: #3D6772;
+    --teal-soft: #EFF3F1;
+    --mauve: #8B6C74;
+    --mauve-soft: #F3EBEC;
+    --taupe: #C9BEB2;
+    --paper: #F9F8F6;
+    --paper-dim: #F1ECE6;
+    --text: #4A454A;
+  }
+  html { color-scheme: light; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--paper);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 1100px; margin: 0 auto; padding: 0 32px; }
+
+  /* ===== NAV ===== */
+  nav {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 28px 0;
+  }
+  .logo {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: 22px;
+    color: var(--ink);
+    letter-spacing: -0.01em;
+  }
+  .logo span { color: var(--teal); }
+  .navlinks { display: flex; font-size: 14px; font-weight: 500; color: var(--ink); }
+  .navlinks a { margin-right: 32px; }
+  .navlinks a:last-child { margin-right: 0; }
+  .navlinks a { text-decoration: none; color: var(--ink); opacity: 0.75; }
+  .cta-btn {
+    background: var(--ink); color: var(--paper); padding: 10px 20px;
+    border-radius: 100px; font-size: 14px; font-weight: 600;
+    text-decoration: none;
+  }
+
+  /* ===== HERO ===== */
+  .hero {
+    position: relative;
+    padding: 60px 0 100px;
+    overflow: hidden;
+  }
+  .rings {
+    position: absolute;
+    right: -180px; top: -80px;
+    width: 640px; height: 640px;
+    pointer-events: none;
+  }
+  .rings .ring {
+    position: absolute; border-radius: 50%;
+    border: 1.5px solid var(--teal);
+    opacity: 0.14;
+  }
+  .rings .ring:nth-child(1) { inset: 0; }
+  .rings .ring:nth-child(2) { inset: 60px; opacity: 0.18; }
+  .rings .ring:nth-child(3) { inset: 120px; opacity: 0.22; border-color: var(--mauve); }
+  .rings .ring:nth-child(4) { inset: 190px; opacity: 0.3; }
+
+  .eyebrow {
+    font-size: 13px; font-weight: 700; letter-spacing: 0.14em;
+    color: var(--mauve); text-transform: uppercase;
+    margin-bottom: 18px;
+  }
+  h1 {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: 58px;
+    line-height: 1.04;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    max-width: 680px;
+  }
+  h1 em {
+    font-style: italic;
+    font-weight: 500;
+    color: var(--teal);
+  }
+  .hero-sub {
+    margin-top: 24px;
+    font-size: 19px;
+    font-weight: 450;
+    line-height: 1.55;
+    color: var(--ink);
+    max-width: 520px;
+    opacity: 1;
+  }
+  .hero-actions { display: flex; gap: 14px; margin-top: 36px; align-items: center; }
+  .btn-primary {
+    background: var(--ink); color: var(--paper); padding: 15px 28px;
+    border-radius: 100px; font-weight: 600; font-size: 15px; text-decoration: none;
+  }
+  .btn-secondary {
+    color: var(--ink); padding: 15px 10px;
+    font-weight: 600; font-size: 15px; text-decoration: none;
+    border-bottom: 1.5px solid var(--ink);
+  }
+
+  /* ===== MARQUEE STRIP ===== */
+  .strip {
+    background: var(--mauve-soft); color: var(--ink);
+    padding: 16px 0; overflow: hidden; white-space: nowrap;
+    border-top: 1px solid rgba(139,108,116,0.15);
+    border-bottom: 1px solid rgba(139,108,116,0.15);
+  }
+  .strip-inner {
+    display: inline-flex; gap: 48px; font-family: 'Caveat', cursive;
+    font-size: 24px; font-weight: 700; color: var(--mauve);
+    animation: scroll 24s linear infinite;
+  }
+  .strip-inner span { color: var(--ink); opacity: 0.5; font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 500; align-self: center; letter-spacing: 0.08em; text-transform: uppercase;}
+  @keyframes scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+  /* ===== PILLARS ===== */
+  .pillars { padding: 90px 0 100px; }
+  .section-head { max-width: 560px; margin-bottom: 56px; }
+  .section-label {
+    font-size: 13px; font-weight: 700; letter-spacing: 0.12em;
+    color: var(--teal); text-transform: uppercase; margin-bottom: 14px;
+  }
+  h2 {
+    font-family: 'Fraunces', serif; font-weight: 600; font-size: 34px;
+    color: var(--ink); letter-spacing: -0.01em; line-height: 1.15;
+  }
+  .pillar-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+  }
+  .pillar-card {
+    background: var(--paper-dim);
+    border-radius: 20px;
+    padding: 32px 28px;
+    position: relative;
+    transition: transform 0.2s ease;
+  }
+  .pillar-card.mid { background: var(--mauve-soft); color: var(--ink); border: 1px solid rgba(139,108,116,0.2); }
+  .pillar-card.mid .pillar-desc { color: var(--ink); opacity: 0.85; }
+  .pillar-card.mid .pillar-tag { color: var(--mauve); opacity: 0.9; }
+  .pillar-tag {
+    font-family: 'Caveat', cursive; font-weight: 700; font-size: 20px;
+    color: var(--mauve); display: block; margin-bottom: 6px;
+  }
+  .pillar-name {
+    font-family: 'Fraunces', serif; font-weight: 600; font-size: 26px;
+    margin-bottom: 12px; color: inherit;
+  }
+  .pillar-desc { font-size: 15px; font-weight: 450; line-height: 1.6; color: var(--ink); opacity: 0.85; }
+
+  /* ===== FAMILY THREAD ===== */
+  .family {
+    background: var(--teal-soft); color: var(--ink);
+    padding: 90px 0;
+    border-top: 1px solid rgba(74,148,144,0.15);
+    border-bottom: 1px solid rgba(74,148,144,0.15);
+  }
+  .family .section-label { color: var(--teal); }
+  .family h2 { color: var(--ink); }
+  .family-sub { color: var(--ink); opacity: 0.85; font-size: 16px; font-weight: 450; max-width: 540px; margin-top: 16px; line-height: 1.6; }
+  .brand-row {
+    display: flex; gap: 20px; margin-top: 52px; align-items: stretch;
+  }
+  .brand-chip {
+    flex: 1; border: 1px solid rgba(61,74,92,0.14); border-radius: 16px;
+    padding: 28px 24px; position: relative; background: var(--paper);
+  }
+  .brand-chip .dot {
+    width: 12px; height: 12px; border-radius: 50%; margin-bottom: 18px;
+  }
+  .brand-chip .name {
+    font-family: 'Fraunces', serif; font-weight: 600; font-size: 20px; margin-bottom: 6px;
+    color: var(--ink);
+  }
+  .brand-chip .desc { font-size: 13px; font-weight: 450; opacity: 0.8; line-height: 1.5; color: var(--ink); }
+  .brand-chip.active { border-color: var(--teal); box-shadow: 0 0 0 1px var(--teal); }
+  .brand-chip.future { border-style: dashed; background: transparent; }
+
+  /* ===== TYPE + COLOR SPEC ===== */
+  .spec { padding: 90px 0 110px; }
+  .spec-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; margin-top: 50px; }
+  .swatch-row { display: flex; flex-wrap: wrap; gap: 14px; }
+  .swatch {
+    width: 108px;
+  }
+  .swatch-color {
+    height: 78px; border-radius: 12px; margin-bottom: 8px;
+    border: 1px solid rgba(0,0,0,0.06);
+  }
+  .swatch-label { font-size: 12px; font-weight: 600; color: var(--ink); }
+  .swatch-hex { font-size: 11px; color: var(--text); opacity: 0.5; font-family: monospace; }
+
+  .type-sample { margin-bottom: 30px; }
+  .type-sample .tlabel { font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--teal); margin-bottom: 10px; }
+  .type-sample .tdemo-serif { font-family: 'Fraunces', serif; font-size: 30px; font-weight: 600; color: var(--ink); }
+  .type-sample .tdemo-sans { font-family: 'Inter', sans-serif; font-size: 16px; font-weight: 450; color: var(--ink); line-height: 1.6; max-width: 420px; }
+  .type-sample .tdemo-script { font-family: 'Caveat', cursive; font-size: 28px; font-weight: 700; color: var(--mauve); }
+
+  footer {
+    padding: 40px 0 60px; text-align: center;
+    font-size: 13px; color: var(--text); opacity: 0.45;
+  }
+
+  @media (max-width: 860px) {
+    h1 { font-size: 38px; }
+    .pillar-grid { grid-template-columns: 1fr; }
+    .spec-grid { grid-template-columns: 1fr; gap: 40px; }
+    .brand-row { flex-direction: column; }
+    .rings { display: none; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav>
+<div class="logo">room to <span>regulate</span></div>
+<div class="navlinks">
+<a href="site-index.html">Survive</a>
+<a href="site-index.html">Solve</a>
+<a href="site-index.html">Shift</a>
+<a href="the-room.html">The Room</a>
+<a href="community.html">Community</a>
+</div>
+<a class="cta-btn" href="community.html">Join us</a>
+</nav>
+</div>
+<div class="hero">
+<div class="rings">
+<div class="ring"></div>
+<div class="ring"></div>
+<div class="ring"></div>
+<div class="ring"></div>
+</div>
+<div class="wrap">
+<div class="eyebrow">Mental health, minus the performance</div>
+<h1>Same DNA, Radically Uncalibrated</h1>
+<p class="hero-sub">A community and resource hub for neurodivergent moms and moms raising neurodivergent kids — built for the mornings no one else prepared you for.</p>
+<div class="hero-actions">
+<a class="btn-primary" href="#">Get the morning script, free</a>
+<a class="btn-secondary" href="#">See how it works</a>
+</div>
+</div>
+</div>
+<div class="strip">
+<div class="strip-inner">
+<span>Actually said in this house</span>
+      "we don't have to fix it, just survive it"  •  "sorry, not sorry"  •  "bring the receipts"  •  "regulated ≠ calm"  • 
+      <span>Actually said in this house</span>
+      "we don't have to fix it, just survive it"  •  "sorry, not sorry"  •  "bring the receipts"  •  "regulated ≠ calm"  • 
+    </div>
+</div>
+<div class="wrap">
+<div class="pillars">
+<div class="section-head">
+<div class="section-label">How the content works</div>
+<h2>Three pillars. One loop. Zero performative positivity.</h2>
+</div>
+<div class="pillar-grid">
+<div class="pillar-card">
+<span class="pillar-tag">the catharsis</span>
+<div class="pillar-name">Survive</div>
+<p class="pillar-desc">The essays, the rage-reads, the "me too" moments. Where you feel seen before anyone asks you to feel better.</p>
+</div>
+<div class="pillar-card mid">
+<span class="pillar-tag">the toolkit</span>
+<div class="pillar-name">Solve</div>
+<p class="pillar-desc">Templates, scripts, and step-by-steps for the exact moment you need them — IEP letters, insurance appeals, morning triage.</p>
+</div>
+<div class="pillar-card">
+<span class="pillar-tag">the leverage</span>
+<div class="pillar-name">Shift</div>
+<p class="pillar-desc">Plain-language policy tracking and a script for your senator's office. Because some of this is a systems problem.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="family">
+<div class="wrap">
+<div class="section-label">Brand family</div>
+<h2>Part of the Health Impact family</h2>
+<p class="family-sub">Room to Regulate shares a throughline with Health Impact Strategies and future Health Impact brands — same underlying values, same teal thread, a distinct voice for a different audience.</p>
+<div class="brand-row">
+<div class="brand-chip">
+<div class="dot" style="background:#5C8580"></div>
+<div class="name">Health Impact Strategies</div>
+<div class="desc">B2B GTM &amp; strategy consulting for digital health, women's health, and health equity clients.</div>
+</div>
+<div class="brand-chip active">
+<div class="dot" style="background:var(--mauve)"></div>
+<div class="name">Room to Regulate</div>
+<div class="desc">Consumer community &amp; content platform for ND moms and moms of ND kids.</div>
+</div>
+<div class="brand-chip future">
+<div class="dot" style="background:var(--taupe)"></div>
+<div class="name">Future Health Impact brand</div>
+<div class="desc">Reserved — next member of the family, same DNA, its own voice.</div>
+</div>
+</div>
+</div>
+</div>
+<div class="wrap">
+<div class="spec">
+<div class="section-head">
+<div class="section-label">Brand tokens</div>
+<h2>Color &amp; type system</h2>
+</div>
+<div class="spec-grid">
+<div>
+<div class="swatch-row">
+<div class="swatch">
+<div class="swatch-color" style="background:#3D3835"></div>
+<div class="swatch-label">Warm Charcoal</div>
+<div class="swatch-hex">#3D3835</div>
+</div>
+<div class="swatch">
+<div class="swatch-color" style="background:#3D6772"></div>
+<div class="swatch-label">Teal (thread)</div>
+<div class="swatch-hex">#3D6772</div>
+</div>
+<div class="swatch">
+<div class="swatch-color" style="background:#8B6C74"></div>
+<div class="swatch-label">Muted Mauve</div>
+<div class="swatch-hex">#8B6C74</div>
+</div>
+<div class="swatch">
+<div class="swatch-color" style="background:#C9BEB2"></div>
+<div class="swatch-label">Taupe</div>
+<div class="swatch-hex">#C9BEB2</div>
+</div>
+<div class="swatch">
+<div class="swatch-color" style="background:#F9F8F6; border:1px solid #eee;"></div>
+<div class="swatch-label">Warm White</div>
+<div class="swatch-hex">#F9F8F6</div>
+</div>
+</div>
+<p style="margin-top:22px; font-size:14px; line-height:1.6; opacity:0.7; max-width:420px;">
+            Regulate Teal is the deliberate thread back to Health Impact Strategies — held back as a quiet accent rather than a dominant color. Every future Health Impact brand carries this teal forward; everything else in the palette is free to change per brand.
+          </p>
+</div>
+<div>
+<div class="type-sample">
+<div class="tlabel">Display — Fraunces</div>
+<div class="tdemo-serif">She holds it together all day.</div>
+</div>
+<div class="type-sample">
+<div class="tlabel">Body — Inter</div>
+<div class="tdemo-sans">Set for readability first — this audience is often reading while depleted. Clear hierarchy, generous line height, no ornamentation competing for attention.</div>
+</div>
+<div class="type-sample">
+<div class="tlabel">Accent — Caveat</div>
+<div class="tdemo-script">bring the receipts</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<footer>Room to Regulate — a Health Impact family brand · Brand comp v1</footer>
+</body>
+</html>
