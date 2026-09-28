@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light only">
+<title>What would it cost to hand some of this off? — Room to Regulate</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600&family=Fraunces:opsz,wght@9..144,400;9..144,500&family=Inter:wght@400;450;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    color-scheme: light only;
+    --ink:#3D3835; --teal:#3D6772; --mauve:#8B6C74; --taupe:#C9BEB2; --paper:#F9F8F6;
+    --ink-soft:#6b635e; --wash:#efeae4; --line:#e3ddd6;
+  }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  html, body { background:var(--paper); }
+  body { color:var(--ink); font-family:"Inter",system-ui,sans-serif; font-weight:450; font-size:17px; line-height:1.6; -webkit-font-smoothing:antialiased; }
+  :focus-visible { outline:2px solid var(--teal); outline-offset:3px; border-radius:4px; }
+  a { color:var(--teal); }
+  .wrap { max-width:1060px; margin:0 auto; padding:0 22px; }
+  header.site { display:flex; align-items:center; justify-content:space-between; padding:22px 0; }
+  .wordmark { font-family:"Caveat",cursive; font-weight:600; font-size:30px; color:var(--ink); text-decoration:none; line-height:1; }
+  .wordmark small { font-size:20px; }
+  .crumb { font-size:14px; color:var(--ink-soft); }
+
+  .intro { padding:22px 0 30px; max-width:660px; }
+  .voice { font-family:"Caveat",cursive; font-weight:500; font-size:26px; color:var(--mauve); line-height:1.2; }
+  h1 { font-family:"Fraunces",Georgia,serif; font-weight:500; font-size:clamp(30px,5.4vw,46px); line-height:1.08; letter-spacing:-.015em; margin-top:4px; }
+  .intro .sub { margin-top:12px; color:var(--ink-soft); }
+
+  .layout { display:grid; grid-template-columns:minmax(0,1.15fr) minmax(0,1fr); gap:44px; align-items:start; }
+
+  .step { border-top:1px solid var(--taupe); padding:22px 0 10px; }
+  .step h2 { font-family:"Fraunces",Georgia,serif; font-weight:500; font-size:21px; margin-bottom:12px; }
+  label.field { display:block; margin-bottom:14px; }
+  label.field > span { display:block; font-size:14px; font-weight:500; margin-bottom:5px; }
+  label.field em { font-style:normal; color:var(--ink-soft); font-weight:400; }
+  input[type=text], input[type=number], select {
+    width:100%; font:inherit; font-size:16px; color:var(--ink);
+    background:#fff; border:1px solid var(--taupe); border-radius:6px; padding:10px 12px;
+  }
+  input:focus, select:focus { outline:none; border-color:var(--teal); box-shadow:0 0 0 2px rgba(61,103,114,.18); }
+  .row { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+  .note { font-size:14px; color:var(--ink-soft); margin:-4px 0 12px; }
+  .check { display:flex; gap:10px; align-items:flex-start; font-size:16px; cursor:pointer; padding:4px 0 10px; }
+  .check input { margin-top:5px; accent-color:var(--teal); width:17px; height:17px; flex:none; }
+
+  /* task list */
+  .task { border-bottom:1px solid var(--line); padding:14px 0; }
+  .task-head { display:flex; gap:12px; align-items:flex-start; }
+  .task-head input[type=checkbox] { margin-top:5px; accent-color:var(--teal); width:18px; height:18px; flex:none; cursor:pointer; }
+  .task-head label { flex:1; cursor:pointer; }
+  .task-name { font-weight:600; display:block; }
+  .task-desc { font-size:14px; color:var(--ink-soft); display:block; }
+  .task-body { display:none; margin:12px 0 2px 30px; }
+  .task.on .task-body { display:block; }
+  .qty { display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
+  .stepper { display:inline-flex; align-items:center; border:1px solid var(--taupe); border-radius:22px; background:#fff; }
+  .stepper button { font:inherit; font-size:18px; width:38px; height:38px; background:none; border:none; color:var(--teal); cursor:pointer; border-radius:22px; }
+  .stepper button:hover { background:var(--wash); }
+  .stepper output { min-width:34px; text-align:center; font-weight:600; }
+  .qty .unit { font-size:15px; color:var(--ink-soft); }
+  .rate-line { font-size:14px; color:var(--ink-soft); margin-top:8px; display:flex; gap:8px; align-items:center; flex-wrap:wrap; }
+  .rate-line input { width:92px; padding:6px 8px; font-size:15px; }
+  .task-cost { margin-left:auto; font-weight:600; font-size:15px; white-space:nowrap; }
+
+  /* results */
+  .results { position:sticky; top:18px; }
+  .panel { background:#fff; border:1px solid var(--line); border-radius:4px; padding:28px 26px; }
+  .headline { font-family:"Fraunces",Georgia,serif; font-weight:400; font-size:clamp(24px,3.2vw,30px); line-height:1.3; }
+  .headline strong { font-weight:500; color:var(--teal); }
+  .empty { color:var(--ink-soft); }
+  .figs { display:grid; grid-template-columns:1fr 1fr; gap:14px 18px; margin-top:22px; padding-top:18px; border-top:1px solid var(--line); }
+  .fig .n { font-family:"Fraunces",Georgia,serif; font-size:24px; font-weight:500; line-height:1.2; }
+  .fig .l { font-size:13.5px; color:var(--ink-soft); }
+  .context { margin-top:18px; font-size:14.5px; color:var(--ink-soft); }
+  .value h3 { font-family:"Fraunces",Georgia,serif; font-weight:500; font-size:18px; margin:24px 0 8px; }
+  .value p.lead { font-size:14px; color:var(--ink-soft); margin-bottom:6px; }
+  .value ol { list-style:none; }
+  .value li { display:grid; grid-template-columns:1fr auto; gap:10px; padding:9px 0; border-bottom:1px solid var(--line); font-size:15px; }
+  .value li span:last-child { font-weight:600; white-space:nowrap; }
+  .value li.best span:first-child::after { content:"Best value"; font-size:12px; color:var(--teal); border:1px solid var(--teal); border-radius:14px; padding:1px 8px; margin-left:8px; white-space:nowrap; }
+  .tools { display:flex; flex-wrap:wrap; gap:10px; margin-top:20px; align-items:center; }
+  .btn { font:inherit; font-weight:500; font-size:15px; background:var(--teal); color:var(--paper); border:none; border-radius:24px; padding:11px 20px; cursor:pointer; }
+  .btn:hover { background:#335862; }
+  .status { font-size:14px; color:var(--teal); }
+
+  .help { margin-top:22px; font-size:15px; }
+  .help h3 { font-family:"Fraunces",Georgia,serif; font-weight:500; font-size:18px; margin-bottom:6px; }
+  .help li { margin:6px 0 6px 18px; color:var(--ink-soft); }
+  .help li strong { color:var(--ink); font-weight:600; }
+
+  /* mobile summary bar */
+  .bar { display:none; }
+  footer { margin:52px 0 90px; font-size:13px; color:var(--ink-soft); max-width:78ch; }
+  footer h2 { font-family:"Fraunces",Georgia,serif; font-weight:500; font-size:16px; color:var(--ink); margin-bottom:6px; }
+  footer li { margin:3px 0 3px 18px; }
+
+  @media (max-width:860px) {
+    .layout { grid-template-columns:1fr; }
+    .results { position:static; }
+    .bar {
+      display:flex; justify-content:space-between; align-items:center; gap:12px;
+      position:fixed; left:0; right:0; bottom:0; z-index:5;
+      background:var(--paper); border-top:1px solid var(--taupe);
+      padding:12px 22px calc(12px + env(safe-area-inset-bottom));
+      font-size:15px;
+    }
+    .bar strong { font-family:"Fraunces",Georgia,serif; font-weight:500; font-size:20px; }
+    .bar a { font-weight:500; }
+  }
+  @media (max-width:480px) { .row, .figs { grid-template-columns:1fr 1fr; } .task-body { margin-left:0; } .panel { padding:22px 18px; } }
+  @media (prefers-reduced-motion:reduce) { * { transition:none !important; scroll-behavior:auto !important; } }
+</style>
+<!-- Analytics: paste the script snippet from your Plausible dashboard on the line below -->
+
+<script>window.plausible = window.plausible || function(){ (window.plausible.q = window.plausible.q || []).push(arguments) };</script>
+</head>
+<body>
+<div class="wrap">
+  <header class="site">
+    <a class="wordmark" href="#">Room <small>to</small> Regulate</a>
+    <span class="crumb">Solve · Calculator</span>
+  </header>
+
+  <section class="intro">
+    <p class="voice">Numbers instead of guilt.</p>
+    <h1>What would it cost to hand some of this off?</h1>
+    <p class="sub">Pick what's eating your week. We'll estimate what it costs where you live and how many hours you'd get back. Nothing you enter leaves this page.</p>
+  </section>
+
+  <div class="layout">
+    <form id="f" onsubmit="return false">
+      <section class="step">
+        <h2>Where you live</h2>
+        <label class="field"><span>State</span><select name="state" id="state"></select></label>
+        <p class="note" id="rpp-note">Prices shown are national averages until you pick a state.</p>
+      </section>
+
+      <section class="step">
+        <h2>Your household</h2>
+        <div class="row">
+          <label class="field"><span>Kids at home</span>
+            <select name="kids"><option>1</option><option selected>2</option><option>3</option><option>4</option></select>
+          </label>
+          <label class="field"><span>Household income <em>(yearly, optional)</em></span>
+            <input type="text" name="income" inputmode="numeric" placeholder="e.g. 95,000">
+          </label>
+        </div>
+        <label class="check"><input type="checkbox" name="nd"> My kid needs a sitter with neurodivergent or special needs experience</label>
+      </section>
+
+      <section class="step">
+        <h2>What you'd hand off</h2>
+        <p class="note">Check what you'd want help with, then set how often. Know your local rate? Change it.</p>
+        <div id="tasks"></div>
+      </section>
+    </form>
+
+    <aside class="results" id="results" aria-live="polite">
+      <div class="panel">
+        <p class="headline" id="headline"></p>
+        <div class="figs" id="figs"></div>
+        <p class="context" id="context"></p>
+        <div class="value" id="value"></div>
+        <div class="tools">
+          <button class="btn" type="button" id="copy">Copy my plan</button>
+          <span class="status" id="status" role="status"></span>
+        </div>
+      </div>
+
+      <div class="help">
+        <h3>Ways to make it cost less</h3>
+        <ul>
+          <li><strong>Dependent care FSA.</strong> If your employer offers one, it can use pre-tax money for after-school care and sitters while you work. Ask HR what your plan covers.</li>
+          <li><strong>Medicaid waivers.</strong> Many states fund respite care for kids with disabilities through waiver programs, sometimes regardless of family income. Waitlists are common, so it's worth applying early. <a href="#">See how it works in Shift</a></li>
+          <li><strong>Trade with another family.</strong> Swapping a few hours of care with a family you trust costs nothing but coordination.</li>
+        </ul>
+      </div>
+    </aside>
+  </div>
+
+  <footer>
+    <h2>Where these numbers come from</h2>
+    <ul id="sources"></ul>
+    <p style="margin-top:10px">Location adjustments use the U.S. Bureau of Economic Analysis 2024 Regional Price Parities by state (all items), applied to in-person services only. Real prices vary by city, provider, and your home. These are planning estimates, not quotes or financial advice.</p>
+  </footer>
+</div>
+
+<div class="bar" id="bar" aria-hidden="true">
+  <span><strong id="bar-total">$0</strong> /month · <span id="bar-hours">0</span> hrs back</span>
+  <a href="#results">See breakdown</a>
+</div>
+
+<script>
+  // BEA Regional Price Parities 2024, all items (US = 100)
+  const RPP = {AL:88.8,AK:102.4,AZ:100.7,AR:86.9,CA:110.7,CO:103.1,CT:103.6,DE:99.8,DC:109.9,FL:103.4,GA:96.3,HI:110.0,ID:95.5,IL:100.0,IN:93.3,IA:87.8,KS:90.1,KY:90.2,LA:88.2,ME:97.1,MD:105.0,MA:105.8,MI:96.2,MN:98.6,MS:87.0,MO:90.8,MT:94.6,NE:90.1,NV:100.0,NH:104.2,NJ:108.8,NM:92.2,NY:107.9,NC:94.3,ND:89.0,OH:92.8,OK:87.8,OR:103.4,PA:97.6,RI:102.3,SC:93.7,SD:88.6,TN:91.9,TX:97.1,UT:98.9,VT:98.0,VA:101.1,WA:107.0,WV:89.5,WI:94.1,WY:92.7};
+  const NAMES = {AL:"Alabama",AK:"Alaska",AZ:"Arizona",AR:"Arkansas",CA:"California",CO:"Colorado",CT:"Connecticut",DE:"Delaware",DC:"District of Columbia",FL:"Florida",GA:"Georgia",HI:"Hawaii",ID:"Idaho",IL:"Illinois",IN:"Indiana",IA:"Iowa",KS:"Kansas",KY:"Kentucky",LA:"Louisiana",ME:"Maine",MD:"Maryland",MA:"Massachusetts",MI:"Michigan",MN:"Minnesota",MS:"Mississippi",MO:"Missouri",MT:"Montana",NE:"Nebraska",NV:"Nevada",NH:"New Hampshire",NJ:"New Jersey",NM:"New Mexico",NY:"New York",NC:"North Carolina",ND:"North Dakota",OH:"Ohio",OK:"Oklahoma",OR:"Oregon",PA:"Pennsylvania",RI:"Rhode Island",SC:"South Carolina",SD:"South Dakota",TN:"Tennessee",TX:"Texas",UT:"Utah",VT:"Vermont",VA:"Virginia",WA:"Washington",WV:"West Virginia",WI:"Wisconsin",WY:"Wyoming"};
+
+  // Base national rates. local: adjust by state price level. childcare: apply kid + ND premiums.
+  // hoursPer: hours of your time returned per unit. src: key into SOURCES.
+  const TASKS = [
+    { id:"afterschool", name:"After-school coverage", desc:"Pickup, snacks, homework, the 3 to 6pm stretch", unit:"hours a month", qty:24, step:4, rate:21.90, per:"hour", hoursPer:1, local:true, childcare:true, src:"care" },
+    { id:"sitter", name:"Evening or weekend sitter", desc:"A night out, an appointment, or just a nap", unit:"hours a month", qty:8, step:2, rate:21.90, per:"hour", hoursPer:1, local:true, childcare:true, src:"care" },
+    { id:"respite", name:"Respite care", desc:"A trained caregiver so you get a real break", unit:"hours a month", qty:8, step:2, rate:30, per:"hour", hoursPer:1, local:true, childcare:false, src:"respite" },
+    { id:"helper", name:"Mother's helper", desc:"Laundry, tidying, backpacks and lunches, while you're home", unit:"hours a month", qty:12, step:2, rate:21.90, per:"hour", hoursPer:1, local:true, childcare:false, src:"care" },
+    { id:"clean", name:"House cleaning", desc:"Standard clean for a typical 3-bedroom home", unit:"visits a month", qty:2, step:1, rate:180, per:"visit", hoursPer:4, local:true, childcare:false, src:"clean" },
+    { id:"dog", name:"Dog walking", desc:"30-minute walks", unit:"walks a month", qty:20, step:4, rate:22, per:"walk", hoursPer:0.5, local:true, childcare:false, src:"dog" },
+    { id:"grocery", name:"Grocery delivery", desc:"Delivery fee, service fee, and tip on a weekly family order", unit:"orders a month", qty:4, step:1, rate:22, per:"order", hoursPer:1.25, local:false, childcare:false, src:"grocery" },
+    { id:"meals", name:"Meal kits or prepared dinners", desc:"Extra cost for a family of four, above what those groceries would cost", unit:"dinners a month", qty:8, step:2, rate:26, per:"dinner", hoursPer:0.75, local:false, childcare:false, src:"meals" },
+    { id:"va", name:"Virtual assistant", desc:"School emails, scheduling, insurance calls, forms", unit:"hours a month", qty:4, step:1, rate:24.40, per:"hour", hoursPer:1.25, local:false, childcare:false, src:"va" }
+  ];
+
+  const SOURCES = {
+    care: "Sitters and helpers: Care.com 2026 Cost of Care Report, about $21.90 an hour for babysitters and after-school sitters. Extra kids add about $1.50 an hour, based on Sittercity's guidance of $1 to $2 per additional child.",
+    respite: "Respite care: 2026 in-home rates for special needs and respite providers generally run $15 to $40 an hour; this tool starts at $30.",
+    clean: "House cleaning: national average around $180 per standard visit in 2026. Hours back assume a household takes roughly twice as long as a professional team.",
+    dog: "Dog walking: 2026 marketplace averages of roughly $18 to $22 per 30-minute walk.",
+    grocery: "Grocery delivery: based on Instacart's 2026 fee structure for a roughly $150 weekly order, with a delivery fee of about $4 to $10 (or $0 with a membership), a service fee of about 5 to 10%, and a tip of about 5 to 10%. Store item markups aren't included.",
+    meals: "Meal kits: HelloFresh runs about $9 to $12.50 per serving in 2026 plus $10.99 shipping per box, or about $44 per dinner for four. The tool subtracts about $18 for what that dinner would cost from groceries, based on the USDA's 2026 moderate-cost food plan for a family of four.",
+    va: "Virtual assistants: ZipRecruiter's May 2026 average of $24.40 an hour for a US-based virtual assistant. Offshore assistants often cost much less.",
+    nd: "Neurodivergent or special needs experience: sitters with specialized training often charge $25 to $40 an hour, so this tool adds $6 an hour."
+  };
+  const ND_PREMIUM = 6, EXTRA_KID = 1.5;
+
+  const f = document.getElementById("f");
+  const stateSel = document.getElementById("state");
+  stateSel.add(new Option("National average", ""));
+  Object.keys(NAMES).sort((a,b) => NAMES[a].localeCompare(NAMES[b])).forEach(k => stateSel.add(new Option(NAMES[k], k)));
+
+  const state = {}; // per task: { on, qty, customRate }
+  TASKS.forEach(t => state[t.id] = { on:false, qty:t.qty, customRate:null });
+  state.afterschool.on = true; state.clean.on = true;
+
+  const money = n => "$" + Math.round(n).toLocaleString("en-US");
+  const money2 = n => "$" + n.toFixed(2).replace(/\.00$/, "");
+
+  function factor() { const s = stateSel.value; return s ? RPP[s] / 100 : 1; }
+  function suggestedRate(t) {
+    let r = t.rate;
+    if (t.childcare) {
+      r += (parseInt(f.kids.value, 10) - 1) * EXTRA_KID;
+      if (f.nd.checked) r += ND_PREMIUM;
+    }
+    if (t.local) r *= factor();
+    return Math.round(r * 100) / 100;
+  }
+  function rateFor(t) { const c = state[t.id].customRate; return c != null ? c : suggestedRate(t); }
+
+  // Build task rows
+  const tasksEl = document.getElementById("tasks");
+  tasksEl.innerHTML = TASKS.map(t => `
+    <div class="task" data-id="${t.id}">
+      <div class="task-head">
+        <input type="checkbox" id="t-${t.id}">
+        <label for="t-${t.id}"><span class="task-name">${t.name}</span><span class="task-desc">${t.desc}</span></label>
+      </div>
+      <div class="task-body">
+        <div class="qty">
+          <span class="stepper">
+            <button type="button" data-act="minus" aria-label="Fewer ${t.unit}">−</button>
+            <output aria-live="polite"></output>
+            <button type="button" data-act="plus" aria-label="More ${t.unit}">+</button>
+          </span>
+          <span class="unit">${t.unit}</span>
+          <span class="task-cost"></span>
+        </div>
+        <div class="rate-line">
+          <label for="r-${t.id}">Rate per ${t.per}</label>
+          <input type="number" id="r-${t.id}" min="0" step="0.5" inputmode="decimal">
+          <button type="button" class="link-reset" data-act="reset" style="font:inherit;font-size:14px;background:none;border:none;color:var(--ink-soft);text-decoration:underline;cursor:pointer" hidden>Use our estimate</button>
+        </div>
+      </div>
+    </div>`).join("");
+
+  tasksEl.addEventListener("change", e => {
+    const row = e.target.closest(".task"); if (!row) return;
+    const id = row.dataset.id;
+    if (e.target.type === "checkbox") { state[id].on = e.target.checked; track("task_toggle", { task:id, on:String(e.target.checked), state: stateSel.value || "national" }); }
+    if (e.target.type === "number") { const v = parseFloat(e.target.value); state[id].customRate = isNaN(v) ? null : v; }
+    render();
+  });
+  tasksEl.addEventListener("click", e => {
+    const b = e.target.closest("button"); if (!b) return;
+    const row = b.closest(".task"); const t = TASKS.find(x => x.id === row.dataset.id);
+    const s = state[t.id];
+    if (b.dataset.act === "plus") s.qty += t.step;
+    if (b.dataset.act === "minus") s.qty = Math.max(0, s.qty - t.step);
+    if (b.dataset.act === "reset") s.customRate = null;
+    render();
+  });
+  let started = false;
+  function markStart() { if (!started) { started = true; track("tool_start", { tool: "outsource_calc" }); } }
+  f.addEventListener("input", markStart);
+  f.addEventListener("change", markStart);
+  tasksEl.addEventListener("click", markStart);
+  f.addEventListener("change", e => { if (!e.target.closest("#tasks")) render(); });
+  stateSel.addEventListener("change", () => { if (stateSel.value) track("calc_state", { state: stateSel.value }); });
+  f.income.addEventListener("input", render);
+
+  function incomeValue() { const n = parseFloat(f.income.value.replace(/[^\d.]/g, "")); return isNaN(n) || n <= 0 ? null : n; }
+
+  function compute() {
+    const rows = TASKS.filter(t => state[t.id].on && state[t.id].qty > 0).map(t => {
+      const r = rateFor(t), q = state[t.id].qty;
+      return { t, rate:r, qty:q, cost:r*q, hours:t.hoursPer*q, perHour:r/t.hoursPer };
+    });
+    const total = rows.reduce((a,x) => a + x.cost, 0);
+    const hours = rows.reduce((a,x) => a + x.hours, 0);
+    return { rows, total, hours };
+  }
+
+  function render() {
+    // task rows
+    TASKS.forEach(t => {
+      const row = tasksEl.querySelector(`[data-id="${t.id}"]`);
+      const s = state[t.id];
+      row.classList.toggle("on", s.on);
+      row.querySelector('input[type=checkbox]').checked = s.on;
+      row.querySelector("output").textContent = s.qty;
+      const rateInput = row.querySelector('input[type=number]');
+      if (document.activeElement !== rateInput) rateInput.value = rateFor(t).toFixed(2).replace(/\.00$/, "");
+      row.querySelector(".link-reset").hidden = s.customRate == null;
+      row.querySelector(".task-cost").textContent = s.on ? money(rateFor(t) * s.qty) + "/mo" : "";
+    });
+
+    // state note
+    const st = stateSel.value;
+    const note = document.getElementById("rpp-note");
+    if (!st) note.textContent = "Prices shown are national averages until you pick a state.";
+    else {
+      const d = Math.round((RPP[st] - 100) * 10) / 10;
+      note.textContent = d === 0 ? `Prices in ${NAMES[st]} run about the same as the national average. In-person services are adjusted to match.`
+        : `Prices in ${NAMES[st]} run about ${Math.abs(d)}% ${d > 0 ? "above" : "below"} the national average. In-person services are adjusted to match. Big cities usually run higher than the state as a whole.`;
+    }
+
+    const { rows, total, hours } = compute();
+    const h = document.getElementById("headline");
+    const figs = document.getElementById("figs");
+    const ctx = document.getElementById("context");
+    const val = document.getElementById("value");
+
+    if (!rows.length) {
+      h.innerHTML = `<span class="empty">Check something on the left to see what it would cost.</span>`;
+      figs.innerHTML = ""; ctx.textContent = ""; val.innerHTML = "";
+    } else {
+      h.innerHTML = `About <strong>${money(total)} a month</strong> buys back roughly <strong>${Math.round(hours)} hours</strong> of your time.`;
+      const weekly = hours / 4.33;
+      const inc = incomeValue();
+      let figsHtml = `
+        <div class="fig"><div class="n">${money(total * 12)}</div><div class="l">per year</div></div>
+        <div class="fig"><div class="n">${weekly.toFixed(1)} hrs</div><div class="l">back each week</div></div>`;
+      if (inc) {
+        const pct = total * 12 / inc * 100;
+        figsHtml += `<div class="fig"><div class="n">${pct < 1 ? "<1" : pct.toFixed(1)}%</div><div class="l">of your household income</div></div>`;
+      }
+      figsHtml += `<div class="fig"><div class="n">${money2(total / hours)}</div><div class="l">average cost per hour back</div></div>`;
+      figs.innerHTML = figsHtml;
+
+      const care = rows.filter(r => r.t.childcare).reduce((a,x) => a + x.cost, 0);
+      if (inc && care > 0) {
+        const cp = care * 12 / inc * 100;
+        ctx.textContent = `Child care alone would be ${cp.toFixed(1)}% of your income. For comparison, federal guidance treats 7% as affordable, and parents in Care.com's 2026 survey reported spending about 20%. If that number stings, it's the system, not your math.`;
+      } else if (!inc) {
+        ctx.textContent = "Add your household income to see how this compares with your budget. It stays on this page.";
+      } else ctx.textContent = "";
+
+      const sorted = [...rows].sort((a,b) => a.perHour - b.perHour);
+      val.innerHTML = `<h3>Where your money buys the most time</h3>
+        <p class="lead">Cost for each hour of your time you get back, lowest first.</p>
+        <ol>${sorted.map((r,i) => `<li class="${i === 0 && sorted.length > 1 ? "best" : ""}"><span>${r.t.name}</span><span>${money2(r.perHour)}/hr</span></li>`).join("")}</ol>`;
+    }
+
+    document.getElementById("bar-total").textContent = money(total);
+    document.getElementById("bar-hours").textContent = Math.round(hours);
+
+    // sources
+    const used = new Set(TASKS.map(t => t.src));
+    if (f.nd.checked) used.add("nd");
+    document.getElementById("sources").innerHTML = [...used].map(k => `<li>${SOURCES[k]}</li>`).join("");
+  }
+
+  function planText() {
+    const { rows, total, hours } = compute();
+    const st = stateSel.value ? NAMES[stateSel.value] : "national average";
+    let s = `My hand-off plan (${st})\n\n`;
+    rows.forEach(r => s += `${r.t.name}: ${r.qty} ${r.t.unit} at ${money2(r.rate)}/${r.t.per} = ${money(r.cost)}/month\n`);
+    s += `\nTotal: ${money(total)}/month (${money(total * 12)}/year)\nTime back: about ${Math.round(hours)} hours a month\n\nEstimates from Room to Regulate's outsourcing calculator.`;
+    return s;
+  }
+  document.getElementById("copy").addEventListener("click", async () => {
+    const status = document.getElementById("status");
+    try { await navigator.clipboard.writeText(planText()); status.textContent = "Copied."; track("tool_complete", { tool:"outsource_calc", method:"copy", tasks: compute().rows.map(r => r.t.id).join(","), state: stateSel.value || "national" }); }
+    catch { status.textContent = "Copy isn't available here."; }
+    setTimeout(() => status.textContent = "", 3000);
+  });
+
+  // Analytics: wire to Plausible/GA4. Aggregate task mix by state is useful demand data.
+  function track(name, props) { if (window.plausible) plausible(name, props ? { props } : undefined); }
+
+  render();
+</script>
+</body>
+</html>
