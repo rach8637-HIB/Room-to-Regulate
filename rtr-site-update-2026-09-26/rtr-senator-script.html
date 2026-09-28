@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light only">
+<title>Call your senators — Room to Regulate</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600&family=Fraunces:opsz,wght@9..144,400;9..144,500&family=Inter:wght@400;450;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    color-scheme: light only;
+    --ink:#3D3835; --teal:#3D6772; --mauve:#8B6C74; --taupe:#C9BEB2; --paper:#F9F8F6;
+    --ink-soft:#6b635e; --wash:#efeae4; --line:#e3ddd6;
+  }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  html, body { background:var(--paper); }
+  body { color:var(--ink); font-family:"Inter",system-ui,sans-serif; font-weight:450; font-size:17px; line-height:1.6; -webkit-font-smoothing:antialiased; }
+  :focus-visible { outline:2px solid var(--teal); outline-offset:3px; border-radius:4px; }
+  a { color:var(--teal); }
+  .wrap { max-width:720px; margin:0 auto; padding:0 22px; }
+  header.site { display:flex; align-items:center; justify-content:space-between; padding:22px 0; }
+  .wordmark { font-family:"Caveat",cursive; font-weight:600; font-size:30px; color:var(--ink); text-decoration:none; line-height:1; }
+  .wordmark small { font-size:20px; }
+  .crumb { font-size:14px; color:var(--ink-soft); }
+
+  .intro { padding:26px 0 26px; }
+  .voice { font-family:"Caveat",cursive; font-weight:500; font-size:26px; color:var(--mauve); line-height:1.2; }
+  h1 { font-family:"Fraunces",Georgia,serif; font-weight:500; font-size:clamp(30px,5.5vw,44px); line-height:1.1; letter-spacing:-.015em; margin-top:4px; }
+  .intro .sub { margin-top:12px; color:var(--ink-soft); max-width:52ch; }
+
+  .step { border-top:1px solid var(--taupe); padding:24px 0 8px; }
+  .step h2 { font-family:"Fraunces",Georgia,serif; font-weight:500; font-size:21px; margin-bottom:14px; }
+  label.field { display:block; margin-bottom:14px; }
+  label.field span { display:block; font-size:14px; font-weight:500; margin-bottom:5px; }
+  label.field em { font-style:normal; color:var(--ink-soft); font-weight:400; }
+  input[type=text], select, textarea {
+    width:100%; font:inherit; font-size:16px; color:var(--ink);
+    background:#fff; border:1px solid var(--taupe); border-radius:6px; padding:10px 12px;
+  }
+  textarea { min-height:78px; resize:vertical; }
+  input:focus, select:focus, textarea:focus { outline:none; border-color:var(--teal); box-shadow:0 0 0 2px rgba(61,103,114,.18); }
+  .row { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+  .zip-row { display:grid; grid-template-columns:140px 1fr; gap:12px; align-items:end; }
+
+  .stance { display:flex; gap:10px; flex-wrap:wrap; margin-bottom:14px; }
+  .stance label { cursor:pointer; }
+  .stance input { position:absolute; opacity:0; pointer-events:none; }
+  .stance span { display:inline-block; border:1px solid var(--taupe); border-radius:22px; padding:8px 16px; font-size:15px; }
+  .stance input:checked + span { border-color:var(--teal); background:var(--wash); color:var(--teal); font-weight:500; }
+  .stance input:focus-visible + span { outline:2px solid var(--teal); outline-offset:2px; }
+
+  .senators { margin:6px 0 4px; }
+  .sen { display:flex; justify-content:space-between; align-items:center; gap:12px; padding:14px 0; border-bottom:1px solid var(--line); }
+  .sen:first-child { border-top:1px solid var(--line); }
+  .sen .name { font-weight:600; }
+  .sen .party { font-size:14px; color:var(--ink-soft); }
+  .call { font:inherit; font-size:15px; font-weight:500; background:var(--teal); color:var(--paper); border-radius:22px; padding:9px 18px; text-decoration:none; white-space:nowrap; }
+  .call:hover { background:#335862; }
+  .hint { font-size:14px; color:var(--ink-soft); margin-top:8px; }
+
+  .script {
+    background:#fff; border:1px solid var(--line); border-radius:4px;
+    padding:26px 26px 28px; font-family:"Fraunces",Georgia,serif; font-size:19px; line-height:1.6;
+  }
+  .script .blank { background:var(--wash); color:var(--mauve); border-radius:3px; padding:0 4px; font-family:"Inter",sans-serif; font-size:16px; }
+  .tools { display:flex; flex-wrap:wrap; gap:10px; margin-top:14px; align-items:center; }
+  .btn { font:inherit; font-weight:500; font-size:15px; background:var(--teal); color:var(--paper); border:none; border-radius:24px; padding:11px 20px; cursor:pointer; }
+  .btn:hover { background:#335862; }
+  .btn.ghost { background:transparent; color:var(--teal); border:1px solid var(--teal); }
+  .status { font-size:14px; color:var(--teal); min-height:1.4em; margin-top:6px; }
+  .tips { font-size:15px; color:var(--ink-soft); margin-top:14px; }
+  .tips li { margin:4px 0 4px 18px; }
+  footer { margin:44px 0 36px; font-size:13px; color:var(--ink-soft); }
+
+  @media (max-width:520px) { .row, .zip-row { grid-template-columns:1fr; } .sen { flex-wrap:wrap; } .script { padding:20px 18px; font-size:18px; } }
+</style>
+<!-- Analytics: paste the script snippet from your Plausible dashboard on the line below -->
+
+<script>window.plausible = window.plausible || function(){ (window.plausible.q = window.plausible.q || []).push(arguments) };</script>
+</head>
+<body>
+<div class="wrap">
+  <header class="site">
+    <a class="wordmark" href="#">Room <small>to</small> Regulate</a>
+    <span class="crumb">Shift · Script builder</span>
+  </header>
+
+  <aside class="rtr-child-activity" aria-label="Short activities for kids" style="margin:24px 0;padding:18px 20px;border-left:3px solid #3d6772;border-radius:0 12px 12px 0;background:#eff3f1;color:#423e45;font:14px/1.5 Inter,system-ui,sans-serif"><strong style="display:block;font-size:16px;margin-bottom:5px">Need a few minutes for this?</strong><span>Start a short activity with your child, then come back to your tool. Ages 3–5 and 6–9; stay nearby.</span> <a href="kids-activities.html" target="_blank" rel="noopener" style="color:#3d6772;font-weight:700;white-space:nowrap">Explore kids’ activities <span aria-hidden="true">↗</span><span class="rtr-sr-only" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)"> (opens in a new tab)</span></a></aside>
+<section class="intro">
+    <p class="voice">Thirty seconds. You've survived worse before breakfast.</p>
+    <h1>Call your senators</h1>
+    <p class="sub">A staffer answers, tallies your call, and that's it. No debate, no quiz. Here's exactly what to say.</p>
+  </section>
+
+  <form id="f" onsubmit="return false">
+    <section class="step">
+      <h2>Where you live</h2>
+      <div class="zip-row">
+        <label class="field"><span>Zip code</span><input type="text" name="zip" inputmode="numeric" maxlength="5" autocomplete="postal-code"></label>
+        <label class="field"><span>State</span><select name="state" id="state"><option value="">Choose your state</option></select></label>
+      </div>
+      <div class="senators" id="senators" aria-live="polite"></div>
+    </section>
+
+    <section class="step">
+      <h2>What you're calling about</h2>
+      <label class="field"><span>Issue</span>
+        <select name="issue" id="issue">
+          <option value="sped">Special education funding</option>
+          <option value="medicaid">Medicaid services for kids with disabilities</option>
+          <option value="mh">Children's mental health access</option>
+          <option value="care">Affordable child care</option>
+          <option value="other">Something else</option>
+        </select>
+      </label>
+      <label class="field"><span>Bill name or number <em>(optional)</em></span><input type="text" name="bill" placeholder="e.g. S. 1234"></label>
+      <div class="stance" role="radiogroup" aria-label="Your position">
+        <label><input type="radio" name="stance" value="support" checked><span>I want them to support it</span></label>
+        <label><input type="radio" name="stance" value="oppose"><span>I want them to oppose it</span></label>
+      </div>
+    </section>
+
+    <section class="step">
+      <h2>About you</h2>
+      <div class="row">
+        <label class="field"><span>First name</span><input type="text" name="name" autocomplete="given-name"></label>
+        <label class="field"><span>Town or city</span><input type="text" name="city" autocomplete="address-level2"></label>
+      </div>
+      <label class="field"><span>Why it matters to your family <em>(optional, one sentence)</em></span>
+        <textarea name="why" placeholder="e.g. My son waited 14 months for an evaluation."></textarea>
+      </label>
+    </section>
+
+    <section class="step">
+      <h2>Your script</h2>
+      <div class="script" id="script" aria-live="polite"></div>
+      <div class="tools">
+        <button class="btn" type="button" id="copy">Copy script</button>
+        <span class="status" id="status" role="status"></span>
+      </div>
+      <ul class="tips">
+        <li>Busy line? Try again later, or leave the same message on voicemail.</li>
+        <li>Calling both senators counts as two calls. That's twice the tally.</li>
+      </ul>
+    </section>
+  </form>
+
+  <footer>Senator data from the public congress-legislators dataset. If it can't load, use the U.S. Capitol switchboard at (202) 224-3121 and ask for your senator by name. Room to Regulate · Shift</footer>
+</div>
+
+<script>
+  const STATES = {AL:"Alabama",AK:"Alaska",AZ:"Arizona",AR:"Arkansas",CA:"California",CO:"Colorado",CT:"Connecticut",DE:"Delaware",FL:"Florida",GA:"Georgia",HI:"Hawaii",ID:"Idaho",IL:"Illinois",IN:"Indiana",IA:"Iowa",KS:"Kansas",KY:"Kentucky",LA:"Louisiana",ME:"Maine",MD:"Maryland",MA:"Massachusetts",MI:"Michigan",MN:"Minnesota",MS:"Mississippi",MO:"Missouri",MT:"Montana",NE:"Nebraska",NV:"Nevada",NH:"New Hampshire",NJ:"New Jersey",NM:"New Mexico",NY:"New York",NC:"North Carolina",ND:"North Dakota",OH:"Ohio",OK:"Oklahoma",OR:"Oregon",PA:"Pennsylvania",RI:"Rhode Island",SC:"South Carolina",SD:"South Dakota",TN:"Tennessee",TX:"Texas",UT:"Utah",VT:"Vermont",VA:"Virginia",WA:"Washington",WV:"West Virginia",WI:"Wisconsin",WY:"Wyoming"};
+
+  // First-3-digit zip ranges -> state (approximate; state dropdown can override)
+  const ZIP = [[5,5,"NY"],[10,27,"MA"],[28,29,"RI"],[30,38,"NH"],[39,49,"ME"],[50,54,"VT"],[55,55,"MA"],[56,59,"VT"],[60,69,"CT"],[70,89,"NJ"],[100,149,"NY"],[150,196,"PA"],[197,199,"DE"],[206,219,"MD"],[220,246,"VA"],[247,268,"WV"],[270,289,"NC"],[290,299,"SC"],[300,319,"GA"],[320,339,"FL"],[341,349,"FL"],[350,369,"AL"],[370,385,"TN"],[386,397,"MS"],[398,399,"GA"],[400,427,"KY"],[430,459,"OH"],[460,479,"IN"],[480,499,"MI"],[500,528,"IA"],[530,549,"WI"],[550,567,"MN"],[570,577,"SD"],[580,588,"ND"],[590,599,"MT"],[600,629,"IL"],[630,658,"MO"],[660,679,"KS"],[680,693,"NE"],[700,714,"LA"],[716,729,"AR"],[730,732,"OK"],[733,733,"TX"],[734,749,"OK"],[750,799,"TX"],[800,816,"CO"],[820,831,"WY"],[832,838,"ID"],[840,847,"UT"],[850,865,"AZ"],[870,884,"NM"],[885,885,"TX"],[889,898,"NV"],[900,961,"CA"],[967,968,"HI"],[970,979,"OR"],[980,994,"WA"],[995,999,"AK"]];
+
+  const ISSUES = {
+    sped: "funding for special education",
+    medicaid: "Medicaid services for children with disabilities",
+    mh: "access to mental health care for children",
+    care: "affordable child care",
+    other: "this issue"
+  };
+
+  const f = document.getElementById("f");
+  const stateSel = document.getElementById("state");
+  const senBox = document.getElementById("senators");
+  const scriptBox = document.getElementById("script");
+
+  Object.entries(STATES).forEach(([k, v]) => stateSel.add(new Option(v, k)));
+
+  let legislators = null, loadFailed = false;
+  fetch("https://theunitedstates.io/congress-legislators/legislators-current.json")
+    .then(r => r.ok ? r.json() : Promise.reject())
+    .then(d => { legislators = d; renderSenators(); })
+    .catch(() => { loadFailed = true; renderSenators(); });
+
+  function zipToState(z) {
+    if (!/^\d{5}$/.test(z)) return "";
+    const p = parseInt(z.slice(0, 3), 10);
+    const hit = ZIP.find(([a, b]) => p >= a && p <= b);
+    return hit ? hit[2] : "";
+  }
+
+  function senatorsFor(st) {
+    if (!legislators || !st) return [];
+    return legislators.filter(l => { const t = l.terms[l.terms.length - 1]; return t.type === "sen" && t.state === st; })
+      .map(l => { const t = l.terms[l.terms.length - 1];
+        return { name: l.name.official_full || `${l.name.first} ${l.name.last}`, last: l.name.last, party: t.party, phone: t.phone }; });
+  }
+
+  let current = [];
+  function renderSenators() {
+    const st = f.state.value;
+    current = senatorsFor(st);
+    if (!st) { senBox.innerHTML = ""; renderScript(); return; }
+    if (current.length) {
+      senBox.innerHTML = current.map(s => `
+        <div class="sen">
+          <div><div class="name">Senator ${s.name}</div><div class="party">${s.party}${s.phone ? " · " + s.phone : ""}</div></div>
+          ${s.phone ? `<a class="call" href="tel:${s.phone.replace(/[^\d+]/g, "")}">Call</a>` : ""}
+        </div>`).join("") + `<p class="hint">These numbers go to their Washington offices.</p>`;
+    } else if (loadFailed) {
+      senBox.innerHTML = `<div class="sen"><div><div class="name">U.S. Capitol switchboard</div><div class="party">Ask for your ${STATES[st]} senators by name</div></div><a class="call" href="tel:+12022243121">Call</a></div>
+        <p class="hint">Senator details couldn't load here. Find their names at <a href="https://www.senate.gov/senators/senators-contact.htm" target="_blank" rel="noopener">senate.gov</a>.</p>`;
+    } else {
+      senBox.innerHTML = `<p class="hint">Finding your senators…</p>`;
+    }
+    renderScript();
+  }
+
+  const esc = s => s.replace(/[&<>]/g, c => ({ "&":"&amp;", "<":"&lt;", ">":"&gt;" }[c]));
+
+  function build(html) {
+    const b = (v, l) => v.trim() ? (html ? esc(v.trim()) : v.trim()) : (html ? `<span class="blank">[${l}]</span>` : `[${l}]`);
+    const st = f.state.value;
+    const who = current.length === 1 ? `Senator ${current[0].last}` : current.length ? `Senator ${current[0].last}` : "Senator [last name]";
+    const stance = f.querySelector('input[name=stance]:checked').value;
+    const bill = f.bill.value.trim();
+    const topic = bill ? `${html ? esc(bill) : bill}, which affects ${ISSUES[f.issue.value]}` : ISSUES[f.issue.value];
+    const ask = stance === "support" ? "to support" : "to oppose";
+    let s = `Hi, my name is ${b(f.name.value, "first name")} and I'm a constituent from ${b(f.city.value, "town")}, ${st ? STATES[st] : "[state]"}. `;
+    s += `I'm a mom calling about ${topic}. `;
+    if (f.why.value.trim()) s += `${html ? esc(f.why.value.trim()) : f.why.value.trim()} `;
+    s += `I'm asking ${who} ${ask} it. `;
+    s += `Please record my position. Thank you.`;
+    if (current.length > 1) s += html ? `<br><br><span style="font-family:Inter,sans-serif;font-size:14px;color:#6b635e">For your second call, swap in Senator ${esc(current[1].last)}.</span>` : `\n\n(Second call: Senator ${current[1].last}.)`;
+    return s;
+  }
+  function renderScript() { scriptBox.innerHTML = build(true); }
+
+  let started = false;
+  function markStart() { if (!started) { started = true; track("tool_start", { tool: "senator_script" }); } }
+  f.zip.addEventListener("input", () => {
+    const st = zipToState(f.zip.value);
+    if (st) { f.state.value = st; renderSenators(); markStart(); }
+  });
+  f.state.addEventListener("change", () => { renderSenators(); markStart(); });
+  senBox.addEventListener("click", e => {
+    if (e.target.closest(".call")) track("call_tap", { tool: "senator_script", state: f.state.value, issue: f.issue.value });
+  });
+  f.addEventListener("input", e => { if (e.target.name !== "zip") renderScript(); });
+  f.addEventListener("change", renderScript);
+  renderScript();
+
+  const status = document.getElementById("status");
+  document.getElementById("copy").addEventListener("click", async () => {
+    try { await navigator.clipboard.writeText(build(false)); status.textContent = "Copied."; track("tool_complete", { tool: "senator_script", method: "copy", issue: f.issue.value }); }
+    catch { status.textContent = "Copy isn't available here. Select the script and copy it manually."; }
+    setTimeout(() => status.textContent = "", 3000);
+  });
+
+function track(name, props) { if (window.plausible) plausible(name, props ? { props } : undefined); }
+</script>
+</body>
+</html>

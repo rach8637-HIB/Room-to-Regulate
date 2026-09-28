@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light only">
+<title>Room to Regulate — Capacity check-in prototype</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600&family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;450;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    color-scheme: light only;
+    --ink: #3D3835;
+    --teal: #3D6772;
+    --mauve: #8B6C74;
+    --taupe: #C9BEB2;
+    --paper: #F9F8F6;
+    --ink-soft: #6b635e;
+    --taupe-wash: #efeae4;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { background: var(--paper); }
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: "Inter", system-ui, sans-serif;
+    font-weight: 450;
+    font-size: 17px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: var(--teal); }
+  :focus-visible { outline: 2px solid var(--teal); outline-offset: 3px; border-radius: 4px; }
+
+  .wrap { max-width: 880px; margin: 0 auto; padding: 0 22px; }
+
+  header.site {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 22px 0;
+  }
+  .wordmark {
+    font-family: "Caveat", cursive; font-weight: 600; font-size: 30px;
+    color: var(--ink); text-decoration: none; line-height: 1;
+  }
+  .wordmark small { font-size: 20px; }
+  .note-tag {
+    font-size: 13px; color: var(--ink-soft);
+    border: 1px dashed var(--taupe); padding: 4px 10px; border-radius: 20px;
+  }
+
+  /* ---------- Check-in ---------- */
+  .checkin { padding: 36px 0 20px; }
+  .checkin h1 {
+    font-family: "Fraunces", Georgia, serif;
+    font-weight: 500; font-size: clamp(32px, 6vw, 50px);
+    line-height: 1.08; letter-spacing: -0.015em;
+    max-width: 16ch;
+  }
+  .checkin .sub {
+    margin-top: 14px; color: var(--ink-soft); max-width: 44ch;
+  }
+
+  .rooms {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
+    margin-top: 34px;
+  }
+  .room {
+    position: relative;
+    background: transparent; border: none; cursor: pointer;
+    text-align: left; font: inherit; color: inherit;
+    padding: 26px 20px 22px;
+    min-height: 190px;
+    display: flex; flex-direction: column; justify-content: flex-end;
+    border-radius: 3px;
+    transition: background-color .25s ease;
+  }
+  /* floor-plan walls with a doorway gap on the bottom edge */
+  .room svg.plan {
+    position: absolute; inset: 0; width: 100%; height: 100%;
+    overflow: visible; pointer-events: none;
+  }
+  .room svg.plan path {
+    fill: none; stroke: var(--taupe); stroke-width: 2;
+    vector-effect: non-scaling-stroke;
+    transition: stroke .25s ease;
+  }
+  .room .door {
+    transform-origin: left bottom;
+    transition: transform .45s cubic-bezier(.3,.7,.2,1), stroke .25s ease;
+  }
+  .room:hover svg.plan path, .room:focus-visible svg.plan path { stroke: var(--mauve); }
+  .room[aria-pressed="true"] { background: var(--taupe-wash); }
+  .room[aria-pressed="true"] svg.plan path { stroke: var(--teal); }
+  .room[aria-pressed="true"] .door { transform: rotate(-70deg); }
+
+  .room .level {
+    font-family: "Fraunces", Georgia, serif; font-weight: 500;
+    font-size: 22px; line-height: 1.15;
+  }
+  .room .pillar {
+    margin-top: 6px; font-size: 14px; color: var(--ink-soft);
+  }
+
+  /* ---------- Result ---------- */
+  .result {
+    margin-top: 40px; padding-top: 28px;
+    border-top: 1px solid var(--taupe);
+  }
+  .result[hidden] { display: none; }
+  .result .voice {
+    font-family: "Caveat", cursive; font-weight: 500;
+    font-size: 28px; color: var(--mauve); line-height: 1.2;
+  }
+  .result h2 {
+    font-family: "Fraunces", Georgia, serif; font-weight: 500;
+    font-size: 28px; line-height: 1.2; margin-top: 6px; max-width: 30ch;
+  }
+  .items { list-style: none; margin-top: 22px; }
+  .items li { border-bottom: 1px solid #e3ddd6; }
+  .items a {
+    display: grid; grid-template-columns: 1fr auto; gap: 4px 18px;
+    padding: 16px 0; text-decoration: none; color: var(--ink);
+  }
+  .items a:hover .title { color: var(--teal); }
+  .items .title { font-weight: 600; transition: color .2s; }
+  .items .desc { grid-column: 1; font-size: 15px; color: var(--ink-soft); max-width: 58ch; }
+  .items .kind {
+    grid-row: 1 / span 2; grid-column: 2; align-self: center;
+    font-size: 13px; color: var(--teal);
+    border: 1px solid var(--teal); border-radius: 20px; padding: 3px 11px;
+    white-space: nowrap;
+  }
+  .result .actions {
+    margin-top: 24px; display: flex; flex-wrap: wrap; gap: 12px; align-items: center;
+  }
+  .btn {
+    font: inherit; font-weight: 500; font-size: 16px;
+    background: var(--teal); color: var(--paper);
+    border: none; border-radius: 26px; padding: 12px 22px; cursor: pointer;
+    text-decoration: none;
+  }
+  .btn:hover { background: #335862; }
+  .link-btn {
+    font: inherit; font-size: 15px; background: none; border: none;
+    color: var(--ink-soft); text-decoration: underline; cursor: pointer;
+  }
+
+  footer.proto {
+    margin: 56px 0 40px; font-size: 13px; color: var(--ink-soft); max-width: 60ch;
+  }
+
+  @media (max-width: 640px) {
+    .rooms { grid-template-columns: 1fr; gap: 12px; }
+    .room { min-height: 104px; padding: 20px 18px 18px; }
+    .items a { grid-template-columns: 1fr; }
+    .items .kind { grid-row: auto; grid-column: 1; justify-self: start; margin-top: 4px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { transition: none !important; animation: none !important; }
+  }
+</style>
+<!-- Analytics: paste the script snippet from your Plausible dashboard on the line below -->
+
+<script>window.plausible = window.plausible || function(){ (window.plausible.q = window.plausible.q || []).push(arguments) };</script>
+</head>
+<body>
+<div class="wrap">
+  <header class="site">
+    <a class="wordmark" href="#">Room <small>to</small> Regulate</a>
+    <span class="note-tag">Prototype</span>
+  </header>
+
+  <main>
+<aside class="rtr-child-activity" aria-label="Short activities for kids" style="margin:24px 0;padding:18px 20px;border-left:3px solid #3d6772;border-radius:0 12px 12px 0;background:#eff3f1;color:#423e45;font:14px/1.5 Inter,system-ui,sans-serif"><strong style="display:block;font-size:16px;margin-bottom:5px">Need a few minutes for this?</strong><span>Start a short activity with your child, then come back to your tool. Ages 3–5 and 6–9; stay nearby.</span> <a href="kids-activities.html" target="_blank" rel="noopener" style="color:#3d6772;font-weight:700;white-space:nowrap">Explore kids’ activities <span aria-hidden="true">↗</span><span class="rtr-sr-only" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)"> (opens in a new tab)</span></a></aside>
+    <section class="checkin" aria-labelledby="q">
+      <h1 id="q">How much is in the tank today?</h1>
+      <p class="sub">Pick the one that's true right now. We'll open the right room. You can change it anytime.</p>
+
+      <div class="rooms" role="group" aria-label="Your capacity today">
+        <button class="room" type="button" data-state="survive" aria-pressed="false">
+          <svg class="plan" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+            <path d="M28 100 H0 V0 H100 V100 H62"/>
+            <path class="door" d="M28 100 H62"/>
+          </svg>
+          <span class="level">Running on fumes</span>
+          <span class="pillar">Take me to Survive</span>
+        </button>
+        <button class="room" type="button" data-state="solve" aria-pressed="false">
+          <svg class="plan" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+            <path d="M28 100 H0 V0 H100 V100 H62"/>
+            <path class="door" d="M28 100 H62"/>
+          </svg>
+          <span class="level">I can handle one thing</span>
+          <span class="pillar">Take me to Solve</span>
+        </button>
+        <button class="room" type="button" data-state="shift" aria-pressed="false">
+          <svg class="plan" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+            <path d="M28 100 H0 V0 H100 V100 H62"/>
+            <path class="door" d="M28 100 H62"/>
+          </svg>
+          <span class="level">I've got some fight in me</span>
+          <span class="pillar">Take me to Shift</span>
+        </button>
+      </div>
+
+      <div class="result" id="result" hidden aria-live="polite">
+        <p class="voice" id="r-voice"></p>
+        <h2 id="r-head" tabindex="-1"></h2>
+        <ul class="items" id="r-items"></ul>
+        <div class="actions">
+          <a class="btn" id="r-cta" href="#"></a>
+          <button class="link-btn" type="button" id="reset">Change my answer</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="proto">
+    Prototype for the Room to Regulate homepage. Content titles are placeholders. Wordmark shown in Caveat as a stand-in for the locked handwritten wordmark.
+  </footer>
+</div>
+
+<script>
+  const content = {
+    survive: {
+      voice: "No fixing required today.",
+      head: "Read something that gets it. That's the whole assignment.",
+      items: [
+        { title: "The morning I let the waffles be dinner", desc: "An essay about lowering the bar and discovering the floor holds.", kind: "3 min read" },
+        { title: "Regulated doesn't mean calm", desc: "Why the goal was never to stop feeling it all.", kind: "4 min read" },
+        { title: "Sixty seconds, eyes closed", desc: "A short guided pause you can do in the car line.", kind: "1 min audio" }
+      ],
+      cta: "More from Survive"
+    },
+    solve: {
+      voice: "One thing. Just one.",
+      head: "Pick the fire that's loudest and we'll hand you the script.",
+      items: [
+        { title: "Morning triage script", desc: "What to say, in order, when everyone is melting down before 8am.", kind: "Free script" },
+        { title: "Request an IEP meeting", desc: "Fill in four blanks and get a letter ready to send to the school.", kind: "Letter builder" },
+        { title: "Appeal an insurance denial", desc: "A starter appeal for therapy and evaluation denials.", kind: "Template" }
+      ],
+      cta: "More from Solve"
+    },
+    shift: {
+      voice: "Okay, let's make some noise.",
+      head: "Here's what's moving this week, and what you can do in five minutes.",
+      items: [
+        { title: "This week in policy", desc: "Example tracker entry: a special education funding bill and where it sits right now.", kind: "Tracker" },
+        { title: "Call your senator", desc: "Enter your zip code and get a 30-second script with the right office number.", kind: "Script builder" },
+        { title: "Send this to one other mom", desc: "A shareable one-pager on the bill, written in plain language.", kind: "Share" }
+      ],
+      cta: "More from Shift"
+    }
+  };
+
+  const rooms = document.querySelectorAll(".room");
+  const result = document.getElementById("result");
+  const vEl = document.getElementById("r-voice");
+  const hEl = document.getElementById("r-head");
+  const list = document.getElementById("r-items");
+  const cta = document.getElementById("r-cta");
+
+  function choose(state, btn) {
+    rooms.forEach(r => r.setAttribute("aria-pressed", r === btn ? "true" : "false"));
+    const c = content[state];
+    vEl.textContent = c.voice;
+    hEl.textContent = c.head;
+    list.innerHTML = c.items.map(i =>
+      `<li><a href="#"><span class="title">${i.title}</span><span class="desc">${i.desc}</span><span class="kind">${i.kind}</span></a></li>`
+    ).join("");
+    cta.textContent = c.cta;
+    result.hidden = false;
+    hEl.focus({ preventScroll: true });
+    result.scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "start" });
+
+    track("checkin_select", { capacity: state });
+  }
+
+function track(name, props) { if (window.plausible) plausible(name, props ? { props } : undefined); }
+  document.getElementById("r-cta").addEventListener("click", () => {
+    const on = document.querySelector('.room[aria-pressed="true"]');
+    if (on) track("checkin_continue", { capacity: on.dataset.state });
+  });
+  document.getElementById("r-items").addEventListener("click", e => {
+    const a = e.target.closest("a"); const on = document.querySelector('.room[aria-pressed="true"]');
+    if (a && on) track("checkin_resource", { capacity: on.dataset.state, resource: a.querySelector(".title").textContent });
+  });
+
+  rooms.forEach(btn => btn.addEventListener("click", () => choose(btn.dataset.state, btn)));
+
+  document.getElementById("reset").addEventListener("click", () => {
+    rooms.forEach(r => r.setAttribute("aria-pressed", "false"));
+    result.hidden = true;
+    rooms[0].focus();
+    window.scrollTo({ top: 0 });
+  });
+</script>
+</body>
+</html>
