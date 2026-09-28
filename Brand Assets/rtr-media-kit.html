@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light only">
+<title>Room to Regulate — Media Kit</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600&family=Fraunces:opsz,wght@9..144,400;9..144,500&family=Inter:wght@400;450;500;600&display=swap" rel="stylesheet">
+<!-- Analytics: paste the script snippet from your Plausible dashboard on the line below -->
+
+<script>window.plausible = window.plausible || function(){ (window.plausible.q = window.plausible.q || []).push(arguments) };</script>
+<style>
+  :root {
+    color-scheme: light only;
+    --ink:#3D3835; --teal:#3D6772; --mauve:#8B6C74; --taupe:#C9BEB2; --paper:#F9F8F6;
+    --ink-soft:#6b635e; --wash:#efeae4; --line:#e3ddd6;
+  }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  html, body { background:var(--paper); }
+  html { scroll-behavior:smooth; }
+  body { color:var(--ink); font-family:"Inter",system-ui,sans-serif; font-weight:450; font-size:17px; line-height:1.6; -webkit-font-smoothing:antialiased; }
+  :focus-visible { outline:2px solid var(--teal); outline-offset:3px; border-radius:4px; }
+  a { color:var(--teal); }
+  .wrap { max-width:1060px; margin:0 auto; padding:0 22px; }
+
+  .sample-banner { background:var(--wash); border-bottom:1px solid var(--taupe); font-size:14px; padding:9px 22px; text-align:center; color:var(--ink); }
+  .sample-banner strong { color:var(--mauve); }
+
+  header.site { display:flex; align-items:center; justify-content:space-between; gap:16px; padding:20px 0; }
+  .wordmark { font-family:"Caveat",cursive; font-weight:600; font-size:30px; color:var(--ink); text-decoration:none; line-height:1; }
+  .wordmark small { font-size:20px; }
+  nav.jump { display:flex; gap:18px; font-size:15px; flex-wrap:wrap; }
+  nav.jump a { color:var(--ink-soft); text-decoration:none; }
+  nav.jump a:hover { color:var(--teal); }
+  .btn { display:inline-block; font:inherit; font-weight:500; font-size:15px; background:var(--teal); color:var(--paper); border:none; border-radius:24px; padding:11px 20px; cursor:pointer; text-decoration:none; }
+  .btn:hover { background:#335862; }
+  .btn.ghost { background:transparent; color:var(--teal); border:1px solid var(--teal); }
+
+  section { padding:48px 0 18px; }
+  .voice { font-family:"Caveat",cursive; font-weight:500; font-size:26px; color:var(--mauve); line-height:1.2; }
+  h1 { font-family:"Fraunces",Georgia,serif; font-weight:500; font-size:clamp(34px,6.2vw,58px); line-height:1.04; letter-spacing:-.02em; max-width:15ch; margin-top:6px; }
+  h2 { font-family:"Fraunces",Georgia,serif; font-weight:500; font-size:clamp(26px,4vw,34px); line-height:1.15; margin-bottom:10px; }
+  h3 { font-family:"Fraunces",Georgia,serif; font-weight:500; font-size:21px; line-height:1.25; }
+  .lede { color:var(--ink-soft); max-width:58ch; margin-top:14px; }
+  .sec-lede { color:var(--ink-soft); max-width:62ch; margin-bottom:26px; }
+  .hero-actions { display:flex; gap:12px; flex-wrap:wrap; margin-top:26px; }
+
+  /* audience numbers */
+  .numbers { display:grid; grid-template-columns:repeat(4,1fr); border-top:1px solid var(--taupe); border-bottom:1px solid var(--taupe); margin-top:40px; }
+  .num { padding:20px 18px 18px 0; }
+  .num + .num { padding-left:18px; border-left:1px solid var(--line); }
+  .num .n { font-family:"Fraunces",Georgia,serif; font-size:32px; font-weight:500; line-height:1.1; }
+  .num .l { font-size:14px; color:var(--ink-soft); margin-top:4px; }
+  .fill { display:inline-block; font-family:"Inter",sans-serif; font-size:14px; font-weight:500; color:var(--mauve); background:#fff3c4; border-radius:4px; padding:1px 7px; }
+
+  /* why */
+  .why { display:grid; grid-template-columns:repeat(2,1fr); gap:0 36px; }
+  .why .fact { border-top:1px solid var(--line); padding:18px 0; }
+  .why .fact p.big { font-family:"Fraunces",Georgia,serif; font-size:22px; line-height:1.3; }
+  .why .fact p.src { font-size:13px; color:var(--ink-soft); margin-top:6px; }
+
+  /* mix bars */
+  .mix { margin-top:30px; max-width:640px; }
+  .mix h3 { margin-bottom:12px; }
+  .bar-row { display:grid; grid-template-columns:150px 1fr 52px; gap:12px; align-items:center; margin:8px 0; font-size:15px; }
+  .bar { height:12px; background:var(--wash); border-radius:6px; overflow:hidden; }
+  .bar span { display:block; height:100%; background:var(--teal); border-radius:6px; }
+  .bar-row .pct { text-align:right; font-weight:600; }
+
+  /* inventory */
+  .inv { display:grid; grid-template-columns:repeat(2,1fr); gap:18px; }
+  .inv-item { border:1px solid var(--line); background:#fff; border-radius:4px; padding:22px; }
+  .inv-item .tag { font-size:13px; color:var(--teal); border:1px solid var(--teal); border-radius:14px; padding:1px 10px; display:inline-block; margin-bottom:10px; }
+  .inv-item.closed { background:transparent; border-style:dashed; }
+  .inv-item.closed .tag { color:var(--ink-soft); border-color:var(--taupe); }
+  .inv-item p { font-size:15px; color:var(--ink-soft); margin-top:6px; }
+  .inv-item p strong { color:var(--ink); font-weight:600; }
+
+  /* preview */
+  .preview-controls { display:grid; grid-template-columns:1fr 1fr; gap:12px; max-width:640px; }
+  label.field span { display:block; font-size:14px; font-weight:500; margin-bottom:5px; }
+  input[type=text], input[type=email], select, textarea { width:100%; font:inherit; font-size:16px; color:var(--ink); background:#fff; border:1px solid var(--taupe); border-radius:6px; padding:10px 12px; }
+  textarea { min-height:90px; resize:vertical; }
+  input:focus, select:focus, textarea:focus { outline:none; border-color:var(--teal); box-shadow:0 0 0 2px rgba(61,103,114,.18); }
+  .mocks { display:grid; grid-template-columns:1.1fr 1fr; gap:22px; margin-top:24px; }
+  .mock-label { font-size:13px; color:var(--ink-soft); margin-bottom:8px; }
+  .mock-tool { background:var(--paper); border:1px solid var(--taupe); border-radius:4px; padding:24px 22px; position:relative; }
+  .mock-tool .presented { display:flex; align-items:center; gap:8px; font-size:13px; color:var(--ink-soft); margin-bottom:14px; }
+  .mock-tool .presented b { color:var(--ink); font-weight:600; }
+  .mock-tool .mt-voice { font-family:"Caveat",cursive; font-size:22px; color:var(--mauve); }
+  .mock-tool .mt-head { font-family:"Fraunces",Georgia,serif; font-size:24px; line-height:1.15; margin-top:2px; }
+  .mock-tool .mt-row { display:flex; justify-content:space-between; border-bottom:1px solid var(--line); padding:9px 0; font-size:15px; }
+  .mock-tool .mt-cta { margin-top:14px; font-size:14px; }
+  .mock-mail { background:#fff; border:1px solid var(--line); border-radius:4px; padding:22px; font-size:15px; }
+  .mock-mail .from { font-size:13px; color:var(--ink-soft); border-bottom:1px solid var(--line); padding-bottom:8px; margin-bottom:12px; }
+  .mock-mail .slot { background:var(--wash); border-radius:4px; padding:14px 16px; margin:12px 0; }
+  .mock-mail .slot .lbl { font-size:12px; color:var(--mauve); font-weight:600; letter-spacing:.02em; }
+  .mock-mail .slot p { margin-top:4px; }
+  .mock-mail .muted { color:var(--ink-soft); }
+
+  /* builder */
+  .builder { display:grid; grid-template-columns:minmax(0,1.3fr) minmax(0,1fr); gap:36px; align-items:start; }
+  .pkg { border-top:1px solid var(--line); padding:18px 0; display:grid; grid-template-columns:auto 1fr auto; gap:6px 14px; }
+  .pkg:last-child { border-bottom:1px solid var(--line); }
+  .pkg input[type=checkbox] { margin-top:6px; accent-color:var(--teal); width:18px; height:18px; cursor:pointer; }
+  .pkg .pname { font-weight:600; cursor:pointer; }
+  .pkg .pmeta { font-size:14px; color:var(--ink-soft); }
+  .pkg ul { grid-column:2 / 4; list-style:none; font-size:14.5px; color:var(--ink-soft); }
+  .pkg ul li::before { content:"– "; color:var(--taupe); }
+  .pkg .price { font-weight:600; text-align:right; white-space:nowrap; }
+  .pkg .qty { grid-column:2 / 4; display:none; align-items:center; gap:10px; font-size:14px; color:var(--ink-soft); margin-top:4px; }
+  .pkg.on .qty { display:flex; }
+  .stepper { display:inline-flex; align-items:center; border:1px solid var(--taupe); border-radius:22px; background:#fff; }
+  .stepper button { font:inherit; font-size:17px; width:34px; height:34px; background:none; border:none; color:var(--teal); cursor:pointer; border-radius:22px; }
+  .stepper output { min-width:30px; text-align:center; font-weight:600; color:var(--ink); }
+  .summary { position:sticky; top:18px; background:#fff; border:1px solid var(--line); border-radius:4px; padding:24px; }
+  .summary h3 { margin-bottom:12px; }
+  .summary .line { display:flex; justify-content:space-between; gap:12px; font-size:15px; padding:6px 0; }
+  .summary .line.total { border-top:1px solid var(--line); margin-top:8px; padding-top:12px; font-weight:600; font-size:17px; }
+  .summary .est { margin-top:14px; padding-top:12px; border-top:1px solid var(--line); font-size:14px; color:var(--ink-soft); }
+  .summary .est div { display:flex; justify-content:space-between; padding:3px 0; }
+  .summary .est b { color:var(--ink); }
+  .summary .empty { color:var(--ink-soft); font-size:15px; }
+  .summary .btn { width:100%; text-align:center; margin-top:16px; }
+
+  /* standards */
+  .standards { columns:2; column-gap:40px; }
+  .standards li { break-inside:avoid; list-style:none; border-top:1px solid var(--line); padding:12px 0; font-size:15.5px; }
+
+  /* contact */
+  .contact { display:grid; grid-template-columns:1fr 1fr; gap:36px; }
+  .contact .fields { display:grid; gap:12px; }
+  .contact .row2 { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+
+  footer { margin:50px 0 40px; padding-top:18px; border-top:1px solid var(--taupe); font-size:13px; color:var(--ink-soft); }
+  footer li { margin:3px 0 3px 18px; }
+
+  @media (max-width:860px) {
+    nav.jump { display:none; }
+    .numbers { grid-template-columns:1fr 1fr; }
+    .num:nth-child(3) { padding-left:0; border-left:none; }
+    .num:nth-child(n+3) { border-top:1px solid var(--line); }
+    .why, .inv, .mocks, .builder, .contact { grid-template-columns:1fr; }
+    .summary { position:static; }
+    .standards { columns:1; }
+  }
+  @media (max-width:480px) { .preview-controls, .contact .row2 { grid-template-columns:1fr; } .bar-row { grid-template-columns:110px 1fr 46px; } }
+  @media (prefers-reduced-motion:reduce) { html { scroll-behavior:auto; } * { transition:none !important; } }
+</style>
+</head>
+<body>
+<div class="sample-banner" id="sample-banner" hidden><strong>Preview with sample numbers.</strong> Set <code>sampleMode: false</code> and add your real numbers before sharing.</div>
+
+<div class="wrap">
+  <header class="site">
+    <a class="wordmark" href="#top">Room <small>to</small> Regulate</a>
+    <nav class="jump" aria-label="Sections">
+      <a href="#audience">Audience</a><a href="#inventory">Where you'll appear</a><a href="#packages">Packages</a><a href="#standards">Standards</a>
+    </nav>
+    <a class="btn" href="#contact">Request a proposal</a>
+  </header>
+
+  <main id="top">
+    <section style="padding-top:28px">
+      <p class="voice">Media kit · <span id="updated"></span></p>
+      <h1>Reach moms at the moment they need something to work.</h1>
+      <p class="lede">Room to Regulate is a community and resource hub for neurodivergent moms and moms raising neurodivergent kids. We publish essays that make people feel seen, working tools that solve real problems in minutes, and plain-language policy tracking. Our partners show up inside that help, not around it.</p>
+      <div class="hero-actions">
+        <a class="btn" href="#packages">Build a package</a>
+        <a class="btn ghost" href="#preview">See your brand in place</a>
+      </div>
+      <div class="numbers" id="numbers"></div>
+    </section>
+
+    <section id="why">
+      <h2>Why this audience</h2>
+      <p class="sec-lede">A large, underserved group of parents carrying more logistics, cost, and advocacy than most brands realize.</p>
+      <div class="why">
+        <div class="fact"><p class="big">About 1 in 31 eight-year-olds in the U.S. has been identified with autism.</p><p class="src">CDC Autism and Developmental Disabilities Monitoring Network, 2022 data</p></div>
+        <div class="fact"><p class="big">An estimated 7 million U.S. children ages 3–17 have a current ADHD diagnosis.</p><p class="src">CDC, from a 2024 national parent survey</p></div>
+        <div class="fact"><p class="big">The average parent says they spend 20% of household income on child care.</p><p class="src">Care.com 2026 Cost of Care Report</p></div>
+        <div class="fact"><p class="big">74% of parents say a better network of trusted caregivers would improve their mental and emotional health.</p><p class="src">Care.com 2026 Cost of Care Report</p></div>
+      </div>
+    </section>
+
+    <section id="audience">
+      <h2>Our audience</h2>
+      <p class="sec-lede" id="aud-lede">Moms managing IEPs, therapies, insurance appeals, and the daily logistics of raising neurodivergent kids, often while neurodivergent themselves. They arrive with a specific problem and leave with something done.</p>
+      <div class="numbers" id="numbers2" style="margin-top:0"></div>
+      <div class="mix" id="mix"></div>
+    </section>
+
+    <section id="inventory">
+      <h2>Where you'll appear</h2>
+      <p class="sec-lede">Partners appear inside tools and content people actually use, clearly labeled, one partner per category.</p>
+      <div class="inv">
+        <div class="inv-item"><span class="tag">Tool</span><h3>Outsourcing cost calculator</h3><p>Estimates what it costs to hand off childcare, cleaning, meals, dog walking, and admin where she lives, and how many hours she gets back. <strong>Fits:</strong> sitter platforms, meal kits, grocery delivery, home services, pet care.</p></div>
+        <div class="inv-item"><span class="tag">Tool</span><h3>IEP meeting request builder</h3><p>Writes a ready-to-send letter requesting an IEP meeting. <strong>Fits:</strong> IEP support services, education and assistive tech, special needs care.</p></div>
+        <div class="inv-item"><span class="tag">Tool</span><h3>Capacity check-in</h3><p>Asks how much a mom has in the tank today and routes her to the right support. <strong>Fits:</strong> routine and executive-function tools, family wellbeing services.</p></div>
+        <div class="inv-item"><span class="tag">Newsletter</span><h3>The weekly send</h3><p>One essay, one tool or template, and the week's policy watch. Primary, secondary, and classified slots.</p></div>
+        <div class="inv-item"><span class="tag">Membership</span><h3>Funded seats in The Room</h3><p>Underwrite free memberships in our paid community through The Shift Fund, with recognition on the membership page.</p></div>
+        <div class="inv-item closed"><span class="tag">Not for sale</span><h3>Shift: policy tracker and senator scripts</h3><p>Our advocacy tools stay sponsor-free so readers can trust them completely.</p></div>
+      </div>
+    </section>
+
+    <section id="preview">
+      <h2>See your brand in place</h2>
+      <p class="sec-lede">Type your brand name to preview a tool sponsorship and a newsletter slot.</p>
+      <div class="preview-controls">
+        <label class="field"><span>Brand name</span><input type="text" id="brand" placeholder="Your brand" maxlength="40"></label>
+        <label class="field"><span>Category</span>
+          <select id="cat">
+            <option value="sitter">Childcare and sitters</option>
+            <option value="meals">Meal kits</option>
+            <option value="grocery">Grocery delivery</option>
+            <option value="pets">Pet care</option>
+            <option value="iep">IEP and school support</option>
+            <option value="routines">Routines and executive function</option>
+          </select>
+        </label>
+      </div>
+      <div class="mocks">
+        <div>
+          <p class="mock-label">Tool sponsorship</p>
+          <div class="mock-tool" id="mock-tool"></div>
+        </div>
+        <div>
+          <p class="mock-label">Newsletter primary slot</p>
+          <div class="mock-mail" id="mock-mail"></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="packages">
+      <h2>Build a package</h2>
+      <p class="sec-lede">Pick what fits your goals. Estimates update as you go, and your selections carry into the proposal request.</p>
+      <div class="builder">
+        <div id="pkgs"></div>
+        <aside class="summary" id="summary" aria-live="polite"></aside>
+      </div>
+    </section>
+
+    <section id="standards">
+      <h2>Our standards</h2>
+      <p class="sec-lede">These protect our readers, and they're why placements here perform.</p>
+      <ul class="standards">
+        <li>Every placement is clearly labeled "Presented by" or "Sponsored," and affiliate relationships are disclosed next to the link.</li>
+        <li>Partners don't review or approve editorial content.</li>
+        <li>One partner per category per placement, so your message isn't crowded out.</li>
+        <li>Comparison listings are ranked by fit for families, never by payment.</li>
+        <li>No ad pixels or retargeting on our tools. Reporting is aggregate; we never share individual reader data.</li>
+        <li>Shift, our policy pillar, doesn't accept sponsors.</li>
+        <li>We don't accept products claiming to treat or cure autism or ADHD, diet or weight-loss products, alcohol, gambling, or high-interest lending.</li>
+        <li>We may decline or end any partnership that conflicts with these standards.</li>
+      </ul>
+    </section>
+
+    <section id="contact">
+      <div class="contact">
+        <div>
+          <h2>Request a proposal</h2>
+          <p class="sec-lede">We'll reply with availability, final pricing, and a launch date. Your package selections are included automatically.</p>
+          <p id="contact-who"></p>
+        </div>
+        <div class="fields">
+          <div class="row2">
+            <label class="field"><span>Your name</span><input type="text" id="c-name" autocomplete="name"></label>
+            <label class="field"><span>Company</span><input type="text" id="c-co" autocomplete="organization"></label>
+          </div>
+          <label class="field"><span>Goals or timing (optional)</span><textarea id="c-msg" placeholder="e.g. Q1 launch, looking to reach parents of kids with ADHD"></textarea></label>
+          <div><a class="btn" id="send" href="#">Email your request</a></div>
+          <p class="pmeta" id="send-note" style="font-size:14px;color:var(--ink-soft)"></p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>Sources: CDC autism data (ADDM Network, 2022 data); CDC ADHD data (2024 national parent survey); Care.com 2026 Cost of Care Report. Audience figures are Room to Regulate first-party data from Plausible analytics and our email platform, updated <span id="updated2"></span>.</p>
+  </footer>
+</div>
+
+<script>
+/* ===================== EDIT HERE =====================
+   Replace sample numbers with your real ones, set sampleMode to false, and fill in contact details.
+   Leave any value as null to show a highlighted placeholder instead. */
+const CONFIG = {
+  sampleMode: true,                      // shows the "sample numbers" banner; set to false before sharing
+  updated: "October 2026",
+  contact: { name: null, title: null, email: null },   // e.g. { name:"Rachel LaGrosse", title:"Founder", email:"partners@roomtoregulate.org" }
+  audience: {
+    engagedSubscribers: 1000,            // opened or clicked in the last 90 days
+    openRate: 0.45,                      // as a decimal
+    monthlyVisitors: 6000,
+    monthlyToolCompletions: 900,
+    sponsoredCTR: 0.02,                  // as a decimal; null shows the 1–3% industry benchmark
+    topStates: "PA, NJ, NY"
+  },
+  checkinMix: { survive: 0.45, solve: 0.35, shift: 0.20 },  // share of check-in choices; null hides the chart
+  multiPackageDiscount: 0.10,            // applied when 2+ packages are selected; null for none
+  packages: [
+    { id:"founding", name:"Founding partner", meta:"3 months · limited to 2", price:1500, unit:"package", max:1, sends:6,
+      includes:["\"Presented by\" on one tool","Mention in 6 newsletters","One sponsored resource page","Monthly performance report"] },
+    { id:"tool", name:"Tool sponsorship", meta:"Per quarter · category-exclusive", price:900, unit:"quarter", max:4, sends:0,
+      includes:["\"Presented by\" on one tool for the quarter","Only partner in your category on that tool"] },
+    { id:"primary", name:"Newsletter primary slot", meta:"Per issue", price:150, unit:"issue", max:12, sends:1, slot:1.0,
+      includes:["Top placement, right after the intro"] },
+    { id:"secondary", name:"Newsletter secondary slot", meta:"Per issue", price:90, unit:"issue", max:12, sends:1, slot:0.6,
+      includes:["Mid-issue placement"] },
+    { id:"classified", name:"Newsletter classified", meta:"Per issue", price:40, unit:"issue", max:12, sends:1, slot:0.25,
+      includes:["One-line listing near the end"] },
+    { id:"seats", name:"Funded memberships", meta:"Through The Shift Fund", price:120, unit:"seat", max:100, step:10, sends:0,
+      includes:["Free annual seats in The Room for families who need them","Recognition on the membership page"] }
+  ]
+};
+/* ===================================================== */
+
+const $ = id => document.getElementById(id);
+const fill = t => `<span class="fill">[${t}]</span>`;
+const fmtN = n => n == null ? fill("add") : Math.round(n).toLocaleString("en-US");
+const fmtP = n => n == null ? fill("add") : Math.round(n * 100) + "%";
+const money = n => "$" + Math.round(n).toLocaleString("en-US");
+const A = CONFIG.audience;
+function track(name, props) { if (window.plausible) plausible(name, props ? { props } : undefined); }
+
+$("sample-banner").hidden = !CONFIG.sampleMode;
+$("updated").textContent = CONFIG.updated || "";
+$("updated2").textContent = CONFIG.updated || "";
+
+// Audience numbers
+const opens = (A.engagedSubscribers != null && A.openRate != null) ? A.engagedSubscribers * A.openRate : null;
+$("numbers").innerHTML = [
+  [fmtN(A.engagedSubscribers), "engaged email subscribers"],
+  [fmtP(A.openRate), "average open rate"],
+  [fmtN(A.monthlyVisitors), "monthly website visitors"],
+  [fmtN(A.monthlyToolCompletions), "tool completions a month"]
+].map(([n,l]) => `<div class="num"><div class="n">${n}</div><div class="l">${l}</div></div>`).join("");
+$("numbers2").innerHTML = [
+  [fmtN(opens), "opens per newsletter issue"],
+  [A.sponsoredCTR != null ? (A.sponsoredCTR*100).toFixed(1) + "%" : "1–3%", A.sponsoredCTR != null ? "sponsored click-through rate" : "industry sponsored click-through benchmark"],
+  [A.topStates ? `<span style="font-size:24px">${A.topStates}</span>` : fill("add"), "top states"],
+  ["U.S.", "audience focus"]
+].map(([n,l]) => `<div class="num"><div class="n">${n}</div><div class="l">${l}</div></div>`).join("");
+
+if (CONFIG.checkinMix) {
+  const m = CONFIG.checkinMix;
+  const rows = [["Running on fumes","Survive",m.survive],["Can handle one thing","Solve",m.solve],["Got some fight","Shift",m.shift]];
+  $("mix").innerHTML = `<h3>How readers arrive</h3><p class="sec-lede" style="margin-bottom:10px;font-size:15px">Share of daily check-in answers. It tells you what state of mind your message meets.</p>` +
+    rows.map(([a,b,v]) => `<div class="bar-row"><span>${a} <span style="color:var(--ink-soft)">· ${b}</span></span><div class="bar"><span style="width:${Math.round(v*100)}%"></span></div><span class="pct">${Math.round(v*100)}%</span></div>`).join("");
+}
+
+// Brand preview
+const CATS = {
+  sitter:  { tool:"calc", line:"Find a sitter near you" },
+  meals:   { tool:"calc", line:"Get dinners handled this week" },
+  grocery: { tool:"calc", line:"Get groceries delivered" },
+  pets:    { tool:"calc", line:"Book a dog walker" },
+  iep:     { tool:"iep",  line:"Get help reviewing the IEP" },
+  routines:{ tool:"checkin", line:"Build a calmer morning routine" }
+};
+function esc(s) { return s.replace(/[&<>"]/g, c => ({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;" }[c])); }
+function renderPreview() {
+  const brand = esc($("brand").value.trim()) || "Your brand";
+  const c = CATS[$("cat").value];
+  let tool = `<div class="presented">Presented by <b>${brand}</b></div>`;
+  if (c.tool === "calc") tool += `<p class="mt-voice">Numbers instead of guilt.</p><p class="mt-head">What would it cost to hand some of this off?</p>
+      <div class="mt-row"><span>After-school coverage</span><span>$524/mo</span></div><div class="mt-row"><span>House cleaning</span><span>$351/mo</span></div>
+      <p class="mt-cta"><a href="#preview">${c.line} with ${brand}</a></p>`;
+  else if (c.tool === "iep") tool += `<p class="mt-voice">You don't have to wait for the annual review.</p><p class="mt-head">Request an IEP meeting</p>
+      <div class="mt-row"><span>Your letter is ready</span><span>Copy · Download</span></div>
+      <p class="mt-cta"><a href="#preview">${c.line} with ${brand}</a></p>`;
+  else tool += `<p class="mt-voice">One thing. Just one.</p><p class="mt-head">How much is in the tank today?</p>
+      <div class="mt-row"><span>Morning triage script</span><span>Free script</span></div>
+      <p class="mt-cta"><a href="#preview">${c.line} with ${brand}</a></p>`;
+  $("mock-tool").innerHTML = tool;
+  $("mock-mail").innerHTML = `<div class="from">From: Room to Regulate · This week: regulated doesn't mean calm</div>
+    <p class="muted">Hi friend. Here's what's in this week's room…</p>
+    <div class="slot"><div class="lbl">PRESENTED BY ${brand.toUpperCase()}</div><p>${c.line}. [Your message, written with us in our voice, 40 to 60 words.]</p></div>
+    <p class="muted">This week's essay: The morning I let the waffles be dinner…</p>`;
+}
+$("brand").addEventListener("input", renderPreview);
+$("cat").addEventListener("change", () => { renderPreview(); track("mediakit_preview", { category: $("cat").value }); });
+renderPreview();
+
+// Package builder
+const sel = {};
+CONFIG.packages.forEach(p => sel[p.id] = { on:false, qty:(p.step || 1) });
+$("pkgs").innerHTML = CONFIG.packages.map(p => `
+  <div class="pkg" data-id="${p.id}">
+    <input type="checkbox" id="p-${p.id}" aria-describedby="pm-${p.id}">
+    <div><label class="pname" for="p-${p.id}">${p.name}</label><div class="pmeta" id="pm-${p.id}">${p.meta}</div></div>
+    <div class="price">${p.price != null ? money(p.price) + `<span class="pmeta"> /${p.unit}</span>` : fill("price")}</div>
+    <ul>${p.includes.map(i => `<li>${i}</li>`).join("")}</ul>
+    <div class="qty"><span class="stepper"><button type="button" data-act="minus" aria-label="Fewer">−</button><output></output><button type="button" data-act="plus" aria-label="More">+</button></span><span>${p.unit}${p.unit.endsWith("s") ? "" : "s"}</span></div>
+  </div>`).join("");
+
+$("pkgs").addEventListener("change", e => {
+  const row = e.target.closest(".pkg"); if (!row) return;
+  sel[row.dataset.id].on = e.target.checked;
+  track("mediakit_package", { package: row.dataset.id, on: String(e.target.checked) });
+  renderBuilder();
+});
+$("pkgs").addEventListener("click", e => {
+  const b = e.target.closest("button"); if (!b) return;
+  const id = b.closest(".pkg").dataset.id, p = CONFIG.packages.find(x => x.id === id), step = p.step || 1;
+  if (b.dataset.act === "plus") sel[id].qty = Math.min(p.max, sel[id].qty + step);
+  if (b.dataset.act === "minus") sel[id].qty = Math.max(step, sel[id].qty - step);
+  renderBuilder();
+});
+
+function chosen() { return CONFIG.packages.filter(p => sel[p.id].on).map(p => ({ p, qty: sel[p.id].qty })); }
+
+function renderBuilder() {
+  CONFIG.packages.forEach(p => {
+    const row = document.querySelector(`.pkg[data-id="${p.id}"]`);
+    row.classList.toggle("on", sel[p.id].on);
+    row.querySelector("output").textContent = sel[p.id].qty;
+    row.querySelector(".qty").style.display = (sel[p.id].on && p.max > 1) ? "flex" : "none";
+  });
+  const items = chosen();
+  const s = $("summary");
+  if (!items.length) { s.innerHTML = `<h3>Your package</h3><p class="empty">Select one or more options to see an estimate.</p>`; return; }
+
+  const unpriced = items.some(x => x.p.price == null);
+  let sub = 0; let lines = "";
+  items.forEach(({p, qty}) => {
+    const cost = p.price != null ? p.price * qty : null; if (cost != null) sub += cost;
+    lines += `<div class="line"><span>${p.name}${p.max > 1 ? ` × ${qty}` : ""}</span><span>${cost != null ? money(cost) : "On request"}</span></div>`;
+  });
+  const disc = (items.length >= 2 && CONFIG.multiPackageDiscount) ? sub * CONFIG.multiPackageDiscount : 0;
+  if (disc) lines += `<div class="line"><span>Multi-package discount</span><span>−${money(disc)}</span></div>`;
+  const total = sub - disc;
+
+  // Estimated newsletter reach
+  const sendOpens = items.reduce((a, {p, qty}) => a + (p.sends || 0) * qty, 0) * (opens || 0);
+  const ctr = A.sponsoredCTR;
+  let est = "";
+  if (sendOpens > 0) {
+    est += `<div><span>Est. newsletter opens</span><b>${Math.round(sendOpens).toLocaleString("en-US")}</b></div>`;
+    if (ctr != null) est += `<div><span>Est. clicks at ${(ctr*100).toFixed(1)}% CTR</span><b>${Math.round(sendOpens * ctr).toLocaleString("en-US")}</b></div>`;
+    else est += `<div><span>Est. clicks at 1–3% benchmark</span><b>${Math.round(sendOpens*0.01)}–${Math.round(sendOpens*0.03)}</b></div>`;
+  }
+  if (items.some(x => x.p.id === "founding" || x.p.id === "tool") && A.monthlyToolCompletions != null)
+    est += `<div><span>Tool completions sitewide</span><b>${A.monthlyToolCompletions.toLocaleString("en-US")}/mo</b></div>`;
+  const seats = items.find(x => x.p.id === "seats");
+  if (seats) est += `<div><span>Families given a free seat</span><b>${seats.qty}</b></div>`;
+
+  s.innerHTML = `<h3>Your package</h3>${lines}
+    <div class="line total"><span>Estimated investment</span><span>${unpriced ? (sub ? money(total) + " + custom" : "Custom quote") : money(total)}</span></div>
+    ${est ? `<div class="est">${est}<p style="margin-top:8px;font-size:13px">Estimates use current audience averages; final numbers come in your monthly report.</p></div>` : ""}
+    <a class="btn" href="#contact">Request this package</a>`;
+  updateMail();
+}
+
+// Proposal request
+function summaryText() {
+  const items = chosen();
+  if (!items.length) return "No packages selected yet.";
+  return items.map(({p, qty}) => `- ${p.name}${p.max > 1 ? ` × ${qty}` : ""}`).join("\n");
+}
+function updateMail() {
+  const c = CONFIG.contact;
+  const btn = $("send");
+  const note = $("send-note");
+  if (!c.email) { btn.removeAttribute("href"); btn.setAttribute("aria-disabled","true"); btn.style.opacity = .55; note.innerHTML = `Contact email not set yet. ${fill("add partnerships email in CONFIG")}`; return; }
+  btn.style.opacity = 1; btn.removeAttribute("aria-disabled"); note.textContent = "";
+  const body = `Hi${c.name ? " " + c.name.split(" ")[0] : ""},\n\nI'd like a proposal for Room to Regulate.\n\nName: ${$("c-name").value}\nCompany: ${$("c-co").value}\n\nPackages I'm interested in:\n${summaryText()}\n\n${$("c-msg").value}`;
+  btn.href = `mailto:${c.email}?subject=${encodeURIComponent("Partnership proposal request" + ($("c-co").value ? " — " + $("c-co").value : ""))}&body=${encodeURIComponent(body)}`;
+}
+["c-name","c-co","c-msg"].forEach(id => $(id).addEventListener("input", updateMail));
+$("send").addEventListener("click", () => track("mediakit_request", { packages: chosen().map(x => x.p.id).join(",") || "none" }));
+const who = CONFIG.contact;
+$("contact-who").innerHTML = `${who.name || fill("your name")}${who.title ? ", " + who.title : (who.name ? "" : ", " + fill("title"))}<br>${who.email ? `<a href="mailto:${who.email}">${who.email}</a>` : fill("partnerships email")}`;
+
+renderBuilder();
+updateMail();
+</script>
+</body>
+</html>
